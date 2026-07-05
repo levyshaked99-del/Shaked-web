@@ -1,0 +1,53 @@
+---
+description: Shaked Levy Studio master design system — brand, UX, visual language, motion, and working rules
+alwaysApply: true
+---
+
+# Shaked Levy Studio — Design System
+
+## Philosophy
+Build digital experiences that create trust before the first conversation. Every element must have a purpose. Calm, confident, timeless. Never loud, trendy, or corporate.
+
+Feel like Apple / Linear / Framer / Stripe in principles — premium, elegant, quiet, crafted, intentional. Not flashy. Not marketing.
+
+## UX
+Each section answers **one question only**. Natural scroll flow. No cognitive overload. No unnecessary choices. Effortless interactions.
+
+## Homepage story (locked order)
+Hero → Why websites matter → How we think → Who we build for → Portfolio / Experience → CTA. Nothing else.
+
+## Visual language
+Minimalism and aggressive whitespace. Restraint, not decoration. Typography is the hero — large headlines, short paragraphs, obvious hierarchy.
+
+## Colors (never add new ones)
+- Primary: white · Secondary: very light gray · Text: near black · Accent: existing accent/brand tokens only
+- No colorful gradients. No saturated UI. Use `story-purple`, `accent`, `text`, `secondary` from Tailwind config.
+
+## Surfaces
+- Borders: soft, thin — `border-black/[0.05]`–`/[0.07]`
+- Shadows: almost invisible, large blur, low opacity — `shadow-depth-*`
+- Avoid cards unless necessary; prefer whitespace. If cards: large radius, subtle border/shadow.
+
+## Icons & buttons
+Icons: small, monochrome, supportive — never decorative. Buttons: simple, confident spacing; premium hover, not playful.
+
+## Motion
+Motion communicates, never entertains. Scroll animations: fade, translate, opacity, small scale only. Duration 500–700ms, stagger 80–150ms. Respect `prefers-reduced-motion`.
+
+## Browser mockups
+Premium macOS window: rounded corners, soft shadow, minimal toolbar, perfect proportions, no fake UI clutter.
+
+## Copy
+Human, short, confident. No clichés, buzzwords, or agency language. Never: "stunning experiences" / "next level."
+
+## Conversion
+Trust first, lead second. CTAs feel like the natural next step — never pressure.
+
+## Before every change, ask
+Does this improve trust, clarity, or conversion? If not — do not implement.
+
+## Never (locked)
+Redesign unrelated sections · invent new styles/colors · inconsistent spacing · change typography hierarchy · replace components without instruction · decorative elements · excessive gradients · glassmorphism (unless established) · unnecessary icons · visual noise
+
+## Quality checklist
+Visual consistency · typography hierarchy · spacing rhythm · subtle purposeful motion · existing design system · concise copy · one story per section · increases trust · supports conversion · feels handcrafted
