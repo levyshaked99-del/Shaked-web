@@ -1,5 +1,4 @@
 import { motion, useInView } from 'framer-motion'
-import { Shield } from 'lucide-react'
 import { useRef } from 'react'
 import { EASE_PREMIUM } from '../../motion/easing'
 import { WebsiteTypeCard } from './websiteTypes/WebsiteTypeCard'
@@ -38,10 +37,6 @@ export function ServicesWebsiteFitSection() {
           >
             {WEBSITE_TYPES_INTRO.heading}
           </h2>
-
-          <p className="mx-auto mt-6 max-w-xl whitespace-pre-line text-[0.9375rem] leading-[1.9] text-text/45 md:text-base">
-            {WEBSITE_TYPES_INTRO.description}
-          </p>
         </motion.header>
 
         <div className="mt-16 grid grid-cols-1 gap-8 md:mt-20 md:grid-cols-2 md:gap-7 lg:mt-24 lg:grid-cols-3 lg:gap-10">
@@ -54,18 +49,6 @@ export function ServicesWebsiteFitSection() {
             </div>
           ))}
         </div>
-
-        <motion.div
-          className="mx-auto mt-16 flex max-w-lg flex-col items-center gap-2.5 text-center md:mt-20 lg:mt-20"
-          initial={{ opacity: 0, y: 16 }}
-          animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 16 }}
-          transition={{ duration: 0.85, delay: 0.45, ease: EASE_PREMIUM }}
-        >
-          <Shield size={16} strokeWidth={1.75} className="text-text/25" aria-hidden />
-          <p className="whitespace-pre-line text-sm leading-relaxed text-text/40">
-            {WEBSITE_TYPES_INTRO.footnote}
-          </p>
-        </motion.div>
       </div>
     </section>
   )

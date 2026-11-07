@@ -20,18 +20,49 @@ interface GrowthShowcaseVisualProps {
   hubSubtitle: string
   cards: GrowthOrbitCard[]
   active: boolean
+  animate?: boolean
+}
+
+function OrbitCardInner({
+  label,
+  icon: Icon,
+}: {
+  label: string
+  icon: LucideIcon
+}) {
+  return (
+    <div className="rounded-2xl border border-black/[0.05] bg-white px-3 py-3 text-center shadow-[0_4px_24px_-8px_rgba(0,0,0,0.1)] md:rounded-[18px] md:px-3.5 md:py-3.5">
+      <div className="mx-auto flex h-8 w-8 items-center justify-center rounded-full border border-black/[0.05] bg-secondary/50 md:h-9 md:w-9">
+        <Icon size={15} strokeWidth={1.5} className="text-text/55" aria-hidden />
+      </div>
+      <p className="mt-2.5 text-[11px] font-medium leading-tight text-text/70 md:text-xs">{label}</p>
+    </div>
+  )
 }
 
 function OrbitCard({
   label,
-  icon: Icon,
+  icon,
   index,
+  animate,
 }: {
   label: string
   icon: LucideIcon
   index: number
+  animate: boolean
 }) {
   const slot = CARD_SLOTS[index]
+
+  if (!animate) {
+    return (
+      <div
+        className="absolute z-10 w-[28%] min-w-[88px] max-w-[120px]"
+        style={{ top: slot.top, left: slot.left, transform: 'translate(-50%, -50%)' }}
+      >
+        <OrbitCardInner label={label} icon={icon} />
+      </div>
+    )
+  }
 
   return (
     <motion.div
@@ -42,13 +73,24 @@ function OrbitCard({
       exit={{ opacity: 0, scale: 0.92 }}
       transition={{ ...TRANSITION, delay: index * 0.06 }}
     >
-      <div className="rounded-2xl border border-black/[0.05] bg-white px-3 py-3 text-center shadow-[0_4px_24px_-8px_rgba(0,0,0,0.1)] md:rounded-[18px] md:px-3.5 md:py-3.5">
-        <div className="mx-auto flex h-8 w-8 items-center justify-center rounded-full border border-black/[0.05] bg-secondary/50 md:h-9 md:w-9">
-          <Icon size={15} strokeWidth={1.5} className="text-text/55" aria-hidden />
-        </div>
-        <p className="mt-2.5 text-[11px] font-medium leading-tight text-text/70 md:text-xs">{label}</p>
-      </div>
+      <OrbitCardInner label={label} icon={icon} />
     </motion.div>
+  )
+}
+
+function HubContent({ hubLabel, hubSubtitle }: { hubLabel: string; hubSubtitle: string }) {
+  return (
+    <>
+      <span className="text-[clamp(1.35rem,4vw,2rem)] font-extrabold tracking-tight text-text">
+        {hubLabel}
+      </span>
+      <span
+        className="mt-1.5 text-[11px] font-medium md:text-xs"
+        style={{ color: STORY.purple.DEFAULT }}
+      >
+        {hubSubtitle}
+      </span>
+    </>
   )
 }
 
@@ -58,6 +100,7 @@ export function GrowthShowcaseVisual({
   hubSubtitle,
   cards,
   active,
+  animate = true,
 }: GrowthShowcaseVisualProps) {
   return (
     <div className="relative mx-auto aspect-square w-full max-w-[440px] md:max-w-[480px] lg:max-w-[520px]">
@@ -77,7 +120,7 @@ export function GrowthShowcaseVisual({
         />
       </svg>
 
-      {active && (
+      {animate && active && (
         <motion.div
           className="pointer-events-none absolute inset-[10%]"
           animate={{ rotate: 360 }}
@@ -88,42 +131,60 @@ export function GrowthShowcaseVisual({
         </motion.div>
       )}
 
-      <AnimatePresence mode="wait">
-        <motion.div
-          key={benefitId}
-          className="absolute inset-0"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 0.45, ease: EASE_PREMIUM }}
-        >
-          {cards.map((card, index) => (
-            <OrbitCard key={card.label} label={card.label} icon={card.icon} index={index} />
-          ))}
-        </motion.div>
-      </AnimatePresence>
-
-      <div className="absolute left-1/2 top-1/2 z-20 flex h-[38%] w-[38%] min-h-[120px] min-w-[120px] -translate-x-1/2 -translate-y-1/2 flex-col items-center justify-center rounded-full border border-story-purple/25 bg-white shadow-[0_8px_40px_-12px_rgba(0,0,0,0.12)]">
+      {animate ? (
         <AnimatePresence mode="wait">
           <motion.div
-            key={`${benefitId}-hub`}
-            className="flex flex-col items-center px-4 text-center"
-            initial={{ opacity: 0, scale: 0.94, y: 6 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.96, y: -6 }}
-            transition={{ duration: 0.55, ease: EASE_PREMIUM }}
+            key={benefitId}
+            className="absolute inset-0"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.45, ease: EASE_PREMIUM }}
           >
-            <span className="text-[clamp(1.35rem,4vw,2rem)] font-extrabold tracking-tight text-text">
-              {hubLabel}
-            </span>
-            <span
-              className="mt-1.5 text-[11px] font-medium md:text-xs"
-              style={{ color: STORY.purple.DEFAULT }}
-            >
-              {hubSubtitle}
-            </span>
+            {cards.map((card, index) => (
+              <OrbitCard
+                key={card.label}
+                label={card.label}
+                icon={card.icon}
+                index={index}
+                animate
+              />
+            ))}
           </motion.div>
         </AnimatePresence>
+      ) : (
+        <div key={benefitId} className="absolute inset-0">
+          {cards.map((card, index) => (
+            <OrbitCard
+              key={card.label}
+              label={card.label}
+              icon={card.icon}
+              index={index}
+              animate={false}
+            />
+          ))}
+        </div>
+      )}
+
+      <div className="absolute left-1/2 top-1/2 z-20 flex h-[38%] w-[38%] min-h-[120px] min-w-[120px] -translate-x-1/2 -translate-y-1/2 flex-col items-center justify-center rounded-full border border-story-purple/25 bg-white shadow-[0_8px_40px_-12px_rgba(0,0,0,0.12)]">
+        {animate ? (
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={`${benefitId}-hub`}
+              className="flex flex-col items-center px-4 text-center"
+              initial={{ opacity: 0, scale: 0.94, y: 6 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.96, y: -6 }}
+              transition={{ duration: 0.55, ease: EASE_PREMIUM }}
+            >
+              <HubContent hubLabel={hubLabel} hubSubtitle={hubSubtitle} />
+            </motion.div>
+          </AnimatePresence>
+        ) : (
+          <div key={`${benefitId}-hub`} className="flex flex-col items-center px-4 text-center">
+            <HubContent hubLabel={hubLabel} hubSubtitle={hubSubtitle} />
+          </div>
+        )}
       </div>
     </div>
   )

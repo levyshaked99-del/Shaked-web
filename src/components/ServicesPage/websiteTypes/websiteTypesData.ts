@@ -20,12 +20,11 @@ export const ACCENT_STYLES = {
 } as const
 
 export type WebsiteTypeAccent = keyof typeof ACCENT_STYLES
-export type PreviewCrop = 'premium' | 'business' | 'landing'
 
 export interface WebsiteTypeCardData {
   id: string
   accent: WebsiteTypeAccent
-  previewCrop: PreviewCrop
+  previewImage: string
   badge: string
   title: string
   subtitle: string
@@ -36,17 +35,13 @@ export interface WebsiteTypeCardData {
 export const WEBSITE_TYPES_INTRO = {
   label: 'איזה פתרון מתאים לעסק שלך?',
   heading: 'לכל עסק יש מטרה שונה.\nבוא נבחר את האתר שמתאים לך.',
-  description:
-    'לא כל עסק צריך את אותו אתר.\nבחר את סוג האתר שמתאים למטרות שלך.',
-  footnote:
-    'כל האתרים נבנים בהתאמה לעסק שלך,\nעם דגש על ביצועים, חוויית משתמש ותוצאות.',
 } as const
 
 export const WEBSITE_TYPE_CARDS: WebsiteTypeCardData[] = [
   {
     id: 'landing',
     accent: 'purple',
-    previewCrop: 'landing',
+    previewImage: '/images/services/landing-preview.webp',
     badge: 'אני רוצה',
     title: 'לקבל יותר פניות',
     subtitle: 'Landing Page',
@@ -57,7 +52,7 @@ export const WEBSITE_TYPE_CARDS: WebsiteTypeCardData[] = [
   {
     id: 'business',
     accent: 'blue',
-    previewCrop: 'business',
+    previewImage: '/images/services/business-preview.webp',
     badge: 'אני רוצה',
     title: 'להציג את העסק שלי',
     subtitle: 'Business Website',
@@ -68,7 +63,7 @@ export const WEBSITE_TYPE_CARDS: WebsiteTypeCardData[] = [
   {
     id: 'premium',
     accent: 'gold',
-    previewCrop: 'premium',
+    previewImage: '/images/services/premium-preview.webp',
     badge: 'אני צריך',
     title: 'פתרון ייחודי לעסק שלי',
     subtitle: 'Premium Website',

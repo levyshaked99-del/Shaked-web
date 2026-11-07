@@ -139,7 +139,7 @@ export function ServicePage() {
           </motion.div>
         </main>
 
-        <Footer />
+        <Footer showCta={false} />
       </div>
     </>
   )

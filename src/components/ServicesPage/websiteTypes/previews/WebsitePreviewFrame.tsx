@@ -1,24 +1,18 @@
-import { LandingPagePreview } from './LandingPagePreview'
-import { BusinessPagePreview } from './BusinessPagePreview'
-import { PremiumPagePreview } from './PremiumPagePreview'
-import type { PreviewCrop } from '../websiteTypesData'
-
-const PREVIEWS = {
-  landing: LandingPagePreview,
-  business: BusinessPagePreview,
-  premium: PremiumPagePreview,
-} as const
-
 interface WebsitePreviewFrameProps {
-  crop: PreviewCrop
+  src: string
+  alt: string
 }
 
-export function WebsitePreviewFrame({ crop }: WebsitePreviewFrameProps) {
-  const Preview = PREVIEWS[crop] ?? BusinessPagePreview
-
+export function WebsitePreviewFrame({ src, alt }: WebsitePreviewFrameProps) {
   return (
-    <div className="h-full w-full overflow-hidden bg-[#ECECEB]" role="img" aria-hidden>
-      <Preview />
+    <div className="relative h-full w-full overflow-hidden bg-[#ECECEB]" role="img" aria-label={alt}>
+      <img
+        src={src}
+        alt={alt}
+        className="h-full w-full object-cover object-top"
+        loading="lazy"
+        decoding="async"
+      />
     </div>
   )
 }

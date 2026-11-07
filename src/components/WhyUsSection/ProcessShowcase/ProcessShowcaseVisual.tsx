@@ -1,5 +1,7 @@
 import { AnimatePresence, motion } from 'framer-motion'
+import { usePrefersReducedMotion } from '../../../hooks/usePrefersReducedMotion'
 import { EASE_PREMIUM } from '../../../motion/easing'
+import { WHY_US_PRINCIPLES } from '../whyUsData'
 import { ProcessBrowserFrame } from './ProcessBrowserFrame'
 import { StageDesign } from './stages/StageDesign'
 import { StageLaunch } from './stages/StageLaunch'
@@ -8,12 +10,7 @@ import { StageUnderstand } from './stages/StageUnderstand'
 
 const TRANSITION = { duration: 0.6, ease: EASE_PREMIUM }
 
-const STAGES = [
-  { id: 'understand', Component: StageUnderstand },
-  { id: 'plan', Component: StagePlan },
-  { id: 'design', Component: StageDesign },
-  { id: 'launch', Component: StageLaunch },
-] as const
+const STAGE_COMPONENTS = [StageUnderstand, StagePlan, StageDesign, StageLaunch] as const
 
 interface ProcessShowcaseVisualProps {
   activeStep: number
@@ -21,8 +18,10 @@ interface ProcessShowcaseVisualProps {
 }
 
 export function ProcessShowcaseVisual({ activeStep, playing }: ProcessShowcaseVisualProps) {
-  const stage = STAGES[activeStep] ?? STAGES[0]
-  const StageComponent = stage.Component
+  const prefersReducedMotion = usePrefersReducedMotion()
+  const principle = WHY_US_PRINCIPLES[activeStep] ?? WHY_US_PRINCIPLES[0]
+  const StageView = STAGE_COMPONENTS[activeStep] ?? StageUnderstand
+  const motionEnabled = playing && !prefersReducedMotion
 
   return (
     <div className="relative w-full max-w-[580px] lg:max-w-none">
@@ -31,8 +30,8 @@ export function ProcessShowcaseVisual({ activeStep, playing }: ProcessShowcaseVi
           className="flex flex-col items-center justify-center gap-2 py-4 md:gap-2.5 md:py-6"
           aria-label="שלבי התהליך"
         >
-          {STAGES.map((s, i) => (
-            <li key={s.id} aria-current={i === activeStep ? 'step' : undefined}>
+          {WHY_US_PRINCIPLES.map((step, i) => (
+            <li key={step.id} aria-current={i === activeStep ? 'step' : undefined}>
               <motion.div
                 className="w-1 rounded-full bg-text/10"
                 animate={{
@@ -56,7 +55,7 @@ export function ProcessShowcaseVisual({ activeStep, playing }: ProcessShowcaseVi
             aria-hidden
           />
 
-          {playing && (
+          {motionEnabled && (
             <motion.div
               className="pointer-events-none absolute inset-0 rounded-[28px]"
               animate={{ opacity: [0.4, 0.7, 0.4] }}
@@ -69,20 +68,26 @@ export function ProcessShowcaseVisual({ activeStep, playing }: ProcessShowcaseVi
             />
           )}
 
-          <ProcessBrowserFrame stepIndex={activeStep}>
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={stage.id}
-                className="absolute inset-0"
-                initial={{ opacity: 0, scale: 0.985 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 1.008 }}
-                transition={TRANSITION}
-              >
-                <StageComponent />
-              </motion.div>
-            </AnimatePresence>
-          </ProcessBrowserFrame>
+          <div
+            className="relative"
+            role="img"
+            aria-label={principle.illustrationAlt}
+          >
+            <ProcessBrowserFrame stepIndex={activeStep}>
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={principle.id}
+                  className="absolute inset-0 h-full w-full"
+                  initial={prefersReducedMotion ? false : { opacity: 0, y: 8 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={prefersReducedMotion ? { opacity: 1 } : { opacity: 0, y: -6 }}
+                  transition={TRANSITION}
+                >
+                  <StageView motionEnabled={motionEnabled} />
+                </motion.div>
+              </AnimatePresence>
+            </ProcessBrowserFrame>
+          </div>
         </div>
       </div>
     </div>

@@ -7,7 +7,7 @@ import { Metrics } from './Metrics'
 export function HeroContent() {
   return (
     <motion.div
-      className="flex flex-col justify-center px-6 pb-10 pt-28 md:px-10 md:pb-16 md:pt-32 lg:px-14"
+      className="flex flex-col justify-center px-6 pb-10 pt-28 md:px-10 md:pb-16 md:pt-32 lg:ps-[4.5rem] lg:pe-10"
       variants={staggerContainer(0.1, 0.55)}
       initial="hidden"
       animate="visible"
@@ -53,10 +53,10 @@ export function HeroContent() {
         </Link>
 
         <Link
-          to="/#packages"
+          to="/services"
           className="inline-flex items-center rounded-full border border-accent bg-white px-7 py-3.5 text-sm font-semibold text-text transition-all duration-300 hover:border-brand/30 hover:shadow-depth-sm"
         >
-          צפו בחבילות
+          סוגי אתרים
         </Link>
       </motion.div>
 

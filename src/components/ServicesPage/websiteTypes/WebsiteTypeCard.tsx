@@ -24,7 +24,10 @@ export function WebsiteTypeCard({ card, index, inView }: WebsiteTypeCardProps) {
     >
       <div className="overflow-hidden rounded-[20px] border border-black/[0.05] bg-[#F4F4F3] shadow-[inset_0_1px_0_rgba(255,255,255,0.8)] md:rounded-[22px]">
         <div className="aspect-[16/11] w-full origin-center transition-transform duration-700 ease-[cubic-bezier(0.25,0.1,0.25,1)] group-hover:scale-[1.015] sm:aspect-[5/3]">
-          <WebsitePreviewFrame crop={card.previewCrop} />
+          <WebsitePreviewFrame
+            src={card.previewImage}
+            alt={`תצוגה מקדימה — ${card.subtitle}`}
+          />
         </div>
       </div>
 
