@@ -65,6 +65,7 @@ export function ContactInfoCard() {
 
             const labelEl = (
               <span
+                dir={icon === 'mail' ? 'ltr' : undefined}
                 className={`text-[0.9375rem] leading-relaxed transition-colors duration-300 ${
                   isWhatsApp ? 'text-text/70 group-hover/row:text-text/85' : 'text-text/65 group-hover/row:text-text/75'
                 }`}
@@ -96,7 +97,6 @@ export function ContactInfoCard() {
                   <a
                     href={href}
                     className="group/row flex items-center gap-5 transition-colors duration-300"
-                    dir="ltr"
                   >
                     {iconShell}
                     {labelEl}

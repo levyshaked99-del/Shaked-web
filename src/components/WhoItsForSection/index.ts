@@ -1,0 +1,1 @@
+export { WhoItsForSection } from './WhoItsForSection'

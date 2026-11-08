@@ -61,7 +61,7 @@ export function ContactPage() {
           <ContactTimeline />
         </main>
       </div>
-      <Footer />
+      <Footer showCta={false} />
     </>
   )
 }

@@ -30,7 +30,7 @@ export function ProjectsPage() {
         <GlowOrb tone="blue" size="xl" opacity={0.03} className="-right-[12%] top-[12%] hidden md:block" aria-hidden />
         <GlowOrb tone="violet" size="lg" opacity={0.02} className="-left-[10%] top-[35%]" aria-hidden />
 
-        <SiteNav fixed />
+        <SiteNav />
 
         <main id="main-content" className="relative scroll-smooth">
           <ProjectsHero />
