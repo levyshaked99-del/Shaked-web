@@ -9,19 +9,57 @@ import { WhatsAppIcon } from './WhatsAppIcon'
 const fieldClass =
   'w-full border-0 border-b border-black/[0.08] bg-transparent px-0 py-3.5 text-[0.9375rem] text-text placeholder:text-text/50 transition-colors duration-300 focus:border-brand/40 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2 md:text-base'
 
+type SubmitState = 'idle' | 'submitting' | 'success' | 'error'
+
 export function ContactForm() {
-  const [submitted, setSubmitted] = useState(false)
+  const [submitState, setSubmitState] = useState<SubmitState>('idle')
+  const [errorMessage, setErrorMessage] = useState<string | null>(null)
   const nameId = useId()
   const phoneId = useId()
   const emailId = useId()
   const messageId = useId()
+  const companyId = useId()
 
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
-    setSubmitted(true)
+    setErrorMessage(null)
+    setSubmitState('submitting')
+
+    const form = event.currentTarget
+    const data = new FormData(form)
+    const payload = {
+      name: String(data.get('name') ?? ''),
+      phone: String(data.get('phone') ?? ''),
+      email: String(data.get('email') ?? ''),
+      message: String(data.get('message') ?? ''),
+      company: String(data.get('company') ?? ''),
+    }
+
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      })
+
+      if (!res.ok) {
+        if (res.status === 503) {
+          setErrorMessage('שליחת הטופס עדיין לא הוגדרה בשרת. בינתיים אפשר לפנות בוואטסאפ או במייל.')
+        } else {
+          setErrorMessage('לא הצלחנו לשלוח את הפנייה. נסו שוב או פנו בוואטסאפ.')
+        }
+        setSubmitState('error')
+        return
+      }
+
+      setSubmitState('success')
+    } catch {
+      setErrorMessage('בעיית רשת. בדקו חיבור ונסו שוב, או פנו בוואטסאפ.')
+      setSubmitState('error')
+    }
   }
 
-  if (submitted) {
+  if (submitState === 'success') {
     return (
       <motion.div
         className="flex min-h-[420px] flex-col justify-center py-8"
@@ -42,6 +80,8 @@ export function ContactForm() {
     )
   }
 
+  const isSubmitting = submitState === 'submitting'
+
   return (
     <motion.form
       onSubmit={handleSubmit}
@@ -52,6 +92,11 @@ export function ContactForm() {
       aria-label="טופס יצירת קשר"
       noValidate
     >
+      <div className="sr-only" aria-hidden>
+        <label htmlFor={companyId}>Company</label>
+        <input id={companyId} type="text" name="company" tabIndex={-1} autoComplete="off" />
+      </div>
+
       <div className="space-y-7">
         <div>
           <label htmlFor={nameId} className="mb-2 block text-xs font-medium tracking-wide text-muted">
@@ -62,6 +107,7 @@ export function ContactForm() {
             type="text"
             name="name"
             required
+            disabled={isSubmitting}
             autoComplete="name"
             className={fieldClass}
           />
@@ -76,6 +122,7 @@ export function ContactForm() {
             type="tel"
             name="phone"
             required
+            disabled={isSubmitting}
             autoComplete="tel"
             className={fieldClass}
             dir="ltr"
@@ -91,6 +138,7 @@ export function ContactForm() {
             type="email"
             name="email"
             required
+            disabled={isSubmitting}
             autoComplete="email"
             className={fieldClass}
             dir="ltr"
@@ -105,6 +153,7 @@ export function ContactForm() {
             id={messageId}
             name="message"
             required
+            disabled={isSubmitting}
             rows={4}
             autoComplete="off"
             className={`${fieldClass} resize-none leading-relaxed`}
@@ -112,15 +161,22 @@ export function ContactForm() {
         </div>
       </div>
 
+      {submitState === 'error' && errorMessage && (
+        <p className="text-sm font-medium leading-relaxed text-text" role="alert">
+          {errorMessage}
+        </p>
+      )}
+
       <div className="space-y-4">
         <div className="flex flex-wrap items-center gap-3.5">
           <motion.button
             type="submit"
-            className="group inline-flex items-center gap-2 rounded-full bg-accent px-8 py-3.5 text-sm font-semibold text-white shadow-depth-md transition-shadow duration-300 hover:shadow-depth-lg"
-            whileHover={{ y: -2 }}
-            whileTap={{ scale: 0.98 }}
+            disabled={isSubmitting}
+            className="group inline-flex items-center gap-2 rounded-full bg-accent px-8 py-3.5 text-sm font-semibold text-white shadow-depth-md transition-shadow duration-300 hover:shadow-depth-lg disabled:pointer-events-none disabled:opacity-60"
+            whileHover={isSubmitting ? undefined : { y: -2 }}
+            whileTap={isSubmitting ? undefined : { scale: 0.98 }}
           >
-            שלח פנייה
+            {isSubmitting ? 'שולח…' : 'שלח פנייה'}
             <ArrowLeft
               size={14}
               strokeWidth={2}
