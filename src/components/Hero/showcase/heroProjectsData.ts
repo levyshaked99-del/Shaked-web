@@ -10,22 +10,23 @@ export interface HeroProject {
   objectPosition?: string
 }
 
-/** Per-project preview fit — 1440×900 (16:10) WebP assets under /public/projects */
 const HERO_PREVIEW_FIT: Partial<
   Record<string, { objectFit?: HeroProject['objectFit']; objectPosition?: string }>
 > = {
-  abnei: { objectFit: 'cover', objectPosition: 'top' },
-  katana: { objectFit: 'cover', objectPosition: 'top' },
-  'astoria-estates': { objectFit: 'cover', objectPosition: 'top' },
+  abnei: { objectFit: 'contain', objectPosition: 'top center' },
+  noma: { objectFit: 'contain', objectPosition: 'top center' },
+  elevate: { objectFit: 'contain', objectPosition: 'top center' },
 }
 
 export const HERO_PROJECTS: HeroProject[] = PROJECTS.map(
-  ({ id, number, title, category, previewImage }) => ({
+  ({ id, number, title, category, previewImage, previewPresentation }) => ({
     id,
     number,
     title,
     category,
-    previewImage: previewImage.replace(/\.png$/, '.webp'),
+    previewImage,
+    objectFit: previewPresentation.fit,
+    objectPosition: previewPresentation.position ?? 'top center',
     ...HERO_PREVIEW_FIT[id],
   }),
 )

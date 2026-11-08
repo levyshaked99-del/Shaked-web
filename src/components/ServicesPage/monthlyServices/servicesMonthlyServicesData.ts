@@ -7,7 +7,7 @@ export const MONTHLY_SERVICES_INTRO = {
 } as const
 
 export const MONTHLY_SERVICE_PRICE = {
-  amount: '149.90',
+  amount: '199',
   currency: '₪',
   period: 'לחודש',
 } as const

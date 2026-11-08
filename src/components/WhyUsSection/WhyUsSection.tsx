@@ -50,7 +50,7 @@ function StepItem({ item, isActive, onSelect }: StepItemProps) {
 
       <motion.span
         className="mt-3 block text-[10px] font-semibold tabular-nums tracking-[0.12em] md:mt-5 md:text-[11px]"
-        animate={{ color: isActive ? 'rgba(124, 58, 237, 0.65)' : 'rgba(17,17,17,0.2)' }}
+        animate={{ color: isActive ? '#5B21B6' : '#374151' }}
         transition={TRANSITION}
       >
         {item.number}
@@ -59,7 +59,7 @@ function StepItem({ item, isActive, onSelect }: StepItemProps) {
       <motion.h3
         className="mt-1.5 min-h-[2.2em] text-[0.6875rem] font-bold leading-[1.35] tracking-tight md:mt-2 md:min-h-[2.6em] md:text-xs md:leading-[1.4]"
         animate={{
-          color: isActive ? '#111111' : 'rgba(17,17,17,0.28)',
+          color: isActive ? '#111111' : '#374151',
         }}
         transition={TRANSITION}
       >
@@ -143,7 +143,7 @@ export function WhyUsSection() {
               >
                 {WHY_US_HEADLINE}
               </h2>
-              <p className="mt-4 max-w-lg text-[0.9375rem] leading-[1.85] text-text/45 md:mt-6 md:text-base md:leading-[1.9]">
+              <p className="mt-4 max-w-lg text-[0.9375rem] leading-[1.85] text-text/55 md:mt-6 md:text-base md:leading-[1.9]">
                 {WHY_US_PARAGRAPH}
               </p>
             </motion.div>
@@ -177,7 +177,7 @@ export function WhyUsSection() {
               </LayoutGroup>
             </div>
 
-            <div className="mt-5 lg:hidden">
+            <div className="mt-6 lg:hidden">
               <AnimatePresence mode="wait" initial={false}>
                 <motion.div
                   key={active.id}
@@ -203,7 +203,7 @@ export function WhyUsSection() {
           </div>
         </div>
 
-        <div dir="rtl" className="hidden lg:mt-16 lg:block">
+        <div dir="rtl" className="hidden lg:mt-12 lg:block">
           <div
             className="hidden lg:grid lg:grid-cols-[1fr_auto_1fr_auto_1fr_auto_1fr] lg:items-stretch lg:gap-2"
             role="group"

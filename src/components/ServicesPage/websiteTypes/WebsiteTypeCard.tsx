@@ -33,20 +33,22 @@ export function WebsiteTypeCard({ card, index, inView }: WebsiteTypeCardProps) {
 
       <div className="flex flex-1 flex-col items-center px-1 pb-1 pt-7 text-center md:px-2 md:pt-8 lg:pt-9">
         <span
-          className={`rounded-full border px-3 py-0.5 text-[10px] font-medium tracking-[0.12em] md:text-[11px] ${styles.badge}`}
+          className={`rounded-full border px-3.5 py-1 text-[10px] font-semibold tracking-[0.1em] md:text-[11px] ${styles.badge}`}
         >
           {card.badge}
         </span>
 
-        <h3 className="mt-4 text-[1.3rem] font-bold leading-[1.12] tracking-tight text-text md:text-[1.4rem] lg:text-[1.55rem]">
-          {card.title}
+        <h3
+          className={`mt-5 text-[1.3rem] font-extrabold uppercase leading-[1.06] tracking-[0.05em] md:text-[1.4rem] lg:text-[1.55rem] ${styles.subtitle}`}
+        >
+          {card.subtitle}
         </h3>
 
-        <p className={`mt-1 text-[10px] font-semibold uppercase tracking-[0.14em] md:text-[11px] ${styles.subtitle}`}>
-          {card.subtitle}
+        <p className="mt-2.5 text-[0.9375rem] font-semibold leading-[1.45] tracking-tight text-text/85 md:text-base">
+          {card.title}
         </p>
 
-        <p className="mt-3.5 max-w-[15rem] text-[0.8125rem] leading-[1.8] text-text/40 md:max-w-[16rem] md:text-[0.875rem]">
+        <p className="mt-4 max-w-[16rem] text-[0.8125rem] leading-[1.85] text-text/48 md:max-w-[17rem] md:text-[0.875rem] md:leading-[1.9]">
           {card.description}
         </p>
 

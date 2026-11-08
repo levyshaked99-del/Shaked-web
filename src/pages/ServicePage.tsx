@@ -46,7 +46,7 @@ export function ServicePage() {
           <motion.div variants={staggerContainer(0.08, 0.05)} initial="hidden" animate="visible">
             <motion.div variants={staggerItem}>
               <Link
-                to="/#packages"
+                to="/services"
                 className="group mb-10 inline-flex items-center gap-2 text-sm font-medium text-text/45 transition-colors hover:text-text/70"
               >
                 <ArrowLeft

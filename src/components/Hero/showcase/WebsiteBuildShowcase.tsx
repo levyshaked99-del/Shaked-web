@@ -82,7 +82,7 @@ function MockChrome({ navFilled }: { navFilled: 'wire' | 'muted' | 'text' }) {
 
 function StructureMock() {
   return (
-    <div className="absolute inset-0 flex flex-col bg-white">
+    <div className="absolute inset-0 flex flex-col bg-white" aria-hidden>
       <div
         className="pointer-events-none absolute inset-0 opacity-[0.32]"
         style={{
@@ -131,7 +131,7 @@ const HERO_SCRIM_POLISH =
 
 function DesignMock({ instant }: { instant: boolean }) {
   return (
-    <div className="absolute inset-0 flex flex-col bg-secondary/40" dir="rtl">
+    <div className="absolute inset-0 flex flex-col bg-secondary/40" dir="rtl" aria-hidden>
       <MockChrome navFilled="muted" />
 
       <div className="flex min-h-0 flex-1 flex-col gap-2 p-2.5 md:gap-2.5 md:p-3">
@@ -140,30 +140,18 @@ function DesignMock({ instant }: { instant: boolean }) {
             className="relative flex flex-col justify-center rounded-lg border-2 bg-white p-2 text-right md:p-2.5"
             style={{ borderColor: PURPLE.muted, boxShadow: `0 0 0 1px ${PURPLE.faint}` }}
           >
-            <span className="text-[4.5px] font-medium tracking-wide text-text/35 md:text-[5px]" aria-hidden>
-              Hero · כותרת
-            </span>
-            <span
-              className="mt-0.5 text-[5px] font-semibold tracking-[0.12em] md:text-[6px]"
-              style={{ color: PURPLE.DEFAULT }}
-            >
-              עיצוב
-            </span>
-            <h3 className="mt-1 text-[10px] font-bold leading-tight text-text md:text-[11px]">אתר מדויק</h3>
-            <p className="mt-1 max-w-full text-[5px] leading-snug text-text/50 md:text-[6px]">
-              מסר קצר שמסביר את הערך.
-            </p>
+            <div className="h-1 w-10 rounded bg-black/[0.08]" aria-hidden />
+            <div className="mt-1 h-1.5 w-8 rounded" style={{ backgroundColor: PURPLE.muted }} aria-hidden />
+            <div className="mt-1 h-2.5 w-[72%] rounded bg-black/[0.12] md:h-3" aria-hidden />
+            <div className="mt-1 h-1.5 w-[48%] rounded bg-black/[0.08]" aria-hidden />
             <div className="mt-1 h-1 w-[38%] rounded bg-black/[0.06] ms-auto" aria-hidden />
             <div
-              className="mt-2 inline-flex w-fit items-center rounded-full border border-dashed px-2.5 py-0.5 text-[5px] font-semibold md:text-[6px]"
-              style={{ borderColor: PURPLE.muted, color: PURPLE.DEFAULT, backgroundColor: PURPLE.faint }}
-            >
-              צור קשר
-            </div>
+              className="mt-2 h-2.5 w-10 rounded-full border border-dashed md:h-3 md:w-12"
+              style={{ borderColor: PURPLE.muted, backgroundColor: PURPLE.faint }}
+              aria-hidden
+            />
             <div className="mt-2 flex items-center justify-end gap-1 border-t border-dashed border-black/[0.07] pt-1.5" aria-hidden>
-              <span className="rounded border border-dashed border-black/[0.1] px-1 py-0.5 text-[4px] text-text/40">
-                16px
-              </span>
+              <span className="h-1.5 w-3 rounded border border-dashed border-black/[0.1]" />
               <span className="h-2 w-2 rounded-full border border-black/[0.08]" style={{ backgroundColor: PURPLE.soft }} />
               <span className="h-2 w-2 rounded-full bg-text/80" />
               <span className="h-2 w-2 rounded-full bg-secondary" />
@@ -220,7 +208,7 @@ function DesignMock({ instant }: { instant: boolean }) {
               style={tint ? { boxShadow: `inset 0 0 0 1px ${PURPLE.faint}` } : undefined}
             >
               <div className="mx-auto mb-1 h-1 w-3 rounded bg-black/[0.1]" aria-hidden />
-              <span className="text-[4.5px] font-medium text-text/60 md:text-[5px]">{label}</span>
+              <div className="mx-auto h-1 w-5 rounded bg-black/[0.1] md:w-6" aria-hidden />
             </div>
           ))}
         </div>

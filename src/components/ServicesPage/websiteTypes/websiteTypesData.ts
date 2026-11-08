@@ -1,21 +1,22 @@
+/** Shared CTA hover — identical motion and colors on all service cards */
+const SERVICE_CARD_BUTTON =
+  'border-black/[0.08] text-text/60 hover:border-story-purple/30 hover:bg-story-purple-soft/40 hover:text-text/80'
+
 export const ACCENT_STYLES = {
   purple: {
-    badge: 'border-story-purple/10 bg-story-purple-soft/50 text-story-purple/70',
-    subtitle: 'text-story-purple/55',
-    button:
-      'border-black/[0.08] text-text/60 hover:border-story-purple/30 hover:bg-story-purple-soft/40 hover:text-text/80',
+    badge: 'border-story-purple/10 bg-story-purple-soft/50 text-story-purple',
+    subtitle: 'text-story-purple',
+    button: SERVICE_CARD_BUTTON,
   },
   blue: {
-    badge: 'border-story-blue/10 bg-story-blue-soft/50 text-story-blue/70',
-    subtitle: 'text-story-blue/55',
-    button:
-      'border-black/[0.08] text-text/60 hover:border-story-blue/30 hover:bg-story-blue-soft/40 hover:text-text/80',
+    badge: 'border-story-blue/10 bg-story-blue-soft/50 text-story-blue',
+    subtitle: 'text-story-blue',
+    button: SERVICE_CARD_BUTTON,
   },
   gold: {
-    badge: 'border-black/[0.06] bg-secondary text-text/50',
-    subtitle: 'text-text/45',
-    button:
-      'border-black/[0.1] text-text/65 hover:border-black/[0.2] hover:bg-text hover:text-white',
+    badge: 'border-black/[0.06] bg-secondary text-text/70',
+    subtitle: 'text-text/80',
+    button: SERVICE_CARD_BUTTON,
   },
 } as const
 

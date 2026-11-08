@@ -50,11 +50,11 @@ export function WhyUsProcessCard({
 
   const body = (
     <>
-      <div className="flex flex-1 flex-col px-4 pb-4 pt-4 lg:px-5 lg:pb-3 lg:pt-5">
-        <div className="flex items-start justify-between gap-3">
+      <div className="flex flex-1 flex-col px-4 pb-4 pt-4 lg:px-4 lg:pb-1.5 lg:pt-3">
+        <div className="flex items-start justify-between gap-3 lg:gap-2">
           <div
             className={[
-              'flex h-9 w-9 shrink-0 items-center justify-center rounded-full border transition-colors duration-[550ms]',
+              'flex h-9 w-9 shrink-0 items-center justify-center rounded-full border transition-colors duration-[550ms] lg:h-8 lg:w-8',
               showActive
                 ? 'border-story-purple/20 bg-story-purple/[0.1]'
                 : 'border-story-purple/10 bg-story-purple/[0.06]',
@@ -67,22 +67,22 @@ export function WhyUsProcessCard({
               aria-hidden
             />
           </div>
-          <span className="text-[11px] font-semibold tabular-nums tracking-[0.12em] text-text/25 md:text-xs">
+          <span className="text-[11px] font-semibold tabular-nums tracking-[0.12em] text-text/65 md:text-xs">
             {item.number}
           </span>
         </div>
 
-        <h3 className="mt-3 text-[0.9375rem] font-bold leading-snug tracking-tight text-text md:text-base">
+        <h3 className="mt-3 text-[0.9375rem] font-bold leading-snug tracking-tight text-text md:text-base lg:mt-2.5">
           {item.title}
         </h3>
 
-        <p className="mt-2.5 text-[0.8125rem] leading-[1.75] text-text/50 md:text-sm md:leading-[1.8]">
+        <p className="mt-2.5 text-[0.8125rem] leading-[1.75] text-text/60 md:text-sm md:leading-[1.8] lg:mt-2">
           {item.description}
         </p>
 
-        <ul className="mt-3 space-y-1.5 lg:mt-4 lg:space-y-2">
+        <ul className="mt-3 space-y-1.5 lg:mt-1.5 lg:space-y-0.5">
           {item.highlights.map((line) => (
-            <li key={line} className="flex items-center gap-2 text-[0.75rem] text-text/55 lg:text-[0.8125rem]">
+            <li key={line} className="flex items-center gap-2 text-[0.75rem] text-text/60 lg:text-[0.8125rem]">
               <span className="flex h-4 w-4 shrink-0 items-center justify-center rounded-full bg-story-purple/[0.08]">
                 <Check className="h-2.5 w-2.5 text-story-purple" strokeWidth={2.5} aria-hidden />
               </span>
@@ -94,12 +94,16 @@ export function WhyUsProcessCard({
 
       <div
         className={[
-          'relative mt-auto hidden h-[80px] border-t border-black/[0.04] transition-colors duration-[550ms] lg:block',
+          'relative mt-auto hidden h-[80px] border-t border-black/[0.04] transition-colors duration-[550ms] lg:block lg:h-11',
           showActive ? 'bg-gradient-to-b from-story-purple/[0.04] to-secondary/30' : 'bg-secondary/25',
         ].join(' ')}
         aria-hidden
       >
-        <ProcessCardMiniIllustration stepIndex={stepIndex} />
+        <div className="flex h-full w-full items-center justify-center">
+          <div className="h-full w-full origin-center lg:scale-[0.82]">
+            <ProcessCardMiniIllustration stepIndex={stepIndex} />
+          </div>
+        </div>
       </div>
     </>
   )

@@ -27,7 +27,7 @@ export function ServicesWebsiteFitSection() {
           animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 24 }}
           transition={{ duration: 0.9, ease: EASE_PREMIUM }}
         >
-          <span className="text-[11px] font-semibold tracking-[0.18em] text-text/40 md:text-xs">
+          <span className="text-[11px] font-semibold tracking-[0.18em] text-text/70 md:text-xs">
             {WEBSITE_TYPES_INTRO.label}
           </span>
 

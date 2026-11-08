@@ -14,7 +14,7 @@ import { WhatsAppIcon } from '../ContactSection/WhatsAppIcon'
 import { GlowOrb } from '../ui/GlowOrb'
 
 const NAV_LINKS = [
-  { label: 'סוגי אתרים', href: '/#packages' },
+  { label: 'פרויקטים', href: '/projects' },
   { label: 'אודות', href: '/about' },
   { label: 'יצירת קשר', href: '/contact' },
   { label: 'קבע פגישה', href: '/contact' },

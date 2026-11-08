@@ -7,6 +7,7 @@ import { AccessibilityPage } from './pages/AccessibilityPage'
 import { ContactPage } from './pages/ContactPage'
 import { HomePage } from './pages/HomePage'
 import { ServicesPage } from './pages/ServicesPage'
+import { ProjectsPage } from './pages/ProjectsPage'
 import { ServicePage } from './pages/ServicePage'
 
 function App() {
@@ -18,6 +19,7 @@ function App() {
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/about" element={<AboutPage />} />
+          <Route path="/projects" element={<ProjectsPage />} />
           <Route path="/services" element={<ServicesPage />} />
           <Route path="/services/:slug" element={<ServicePage />} />
           <Route path="/contact" element={<ContactPage />} />

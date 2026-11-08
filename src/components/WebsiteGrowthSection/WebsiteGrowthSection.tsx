@@ -57,7 +57,7 @@ function BenefitCopy({ benefit, animated }: { benefit: WebsiteGrowthBenefit; ani
       >
         {benefit.showcaseHeadline}
       </h2>
-      <p className="mt-5 max-w-lg text-[0.9375rem] leading-[1.85] text-text/45 md:mt-6 md:text-base md:leading-[1.9]">
+      <p className="mt-5 max-w-lg text-[0.9375rem] leading-[1.85] text-text/65 md:mt-6 md:text-base md:leading-[1.9]">
         {benefit.description}
       </p>
       <BenefitFeatures benefit={benefit} animated={animated} />
@@ -150,7 +150,7 @@ export function WebsiteGrowthSection() {
           >
             <div>
               <div className="mb-8 flex items-center justify-between md:mb-10">
-                <span className="inline-flex items-center gap-2 rounded-full border border-black/[0.05] bg-secondary/40 px-3.5 py-1.5 text-[11px] font-medium text-story-purple/65 md:text-xs">
+                <span className="inline-flex items-center gap-2 rounded-full border border-black/[0.05] bg-secondary/40 px-3.5 py-1.5 text-[11px] font-medium text-story-purple md:text-xs">
                   <span className="h-1.5 w-1.5 rounded-full bg-story-purple" aria-hidden />
                   {WEBSITE_GROWTH_BADGE}
                 </span>

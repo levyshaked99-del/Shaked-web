@@ -27,9 +27,10 @@ export function BrowserFrame({ children, footer }: BrowserFrameProps) {
             <div className="h-2 w-2 rounded-full bg-[#E8E8E8] md:h-2.5 md:w-2.5" />
             <div className="h-2 w-2 rounded-full bg-[#E8E8E8] md:h-2.5 md:w-2.5" />
           </div>
-          <div className="mx-auto flex h-6 flex-1 max-w-[180px] items-center justify-center rounded-md bg-primary px-3 ring-1 ring-black/[0.04] md:h-7 md:max-w-[220px]">
-            <span className="truncate text-[9px] text-text/30 md:text-[10px]">your-business.co.il</span>
-          </div>
+          <div
+            className="mx-auto h-1.5 w-20 max-w-[55%] rounded bg-black/[0.08] md:w-24"
+            aria-hidden
+          />
         </div>
 
         <div className="relative aspect-[10/7] w-full overflow-hidden bg-white">{children}</div>
