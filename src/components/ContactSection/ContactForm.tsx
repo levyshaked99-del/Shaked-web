@@ -71,10 +71,10 @@ export function ContactForm() {
         aria-atomic="true"
       >
         <h2 className="text-[clamp(1.5rem,3vw,2rem)] font-bold tracking-tight text-text">
-          תודה על הפנייה.
+          תודה על הפנייה!
         </h2>
         <p className="mt-4 max-w-sm text-[0.9375rem] leading-relaxed text-text/60 md:text-base">
-          קיבלתי את ההודעה ואחזור אליך תוך 24 שעות לתיאום שיחת אפיון.
+          קיבלתי את הפרטים ואחזור אליך בהקדם כדי להמשיך משם.
         </p>
       </motion.div>
     )
@@ -200,7 +200,7 @@ export function ContactForm() {
         </div>
 
         <p className="text-xs leading-relaxed text-muted">
-          כל פנייה מקבלת מענה אישי תוך 24 שעות.
+          כל פנייה מקבלת מענה אישי.
         </p>
       </div>
     </motion.form>

@@ -19,7 +19,7 @@ export function HomeContactSection() {
           בואו נבנה את האתר הבא שלכם
         </h2>
         <p className="mx-auto mt-5 max-w-[580px] text-base leading-[1.75] text-text/60 md:text-lg">
-          השאירו פרטים ונחזור אליכם תוך 24 שעות לשיחת אפיון ללא התחייבות.
+          השאירו פרטים ונחזור אליכם לשיחת אפיון ללא התחייבות.
         </p>
       </Reveal>
 

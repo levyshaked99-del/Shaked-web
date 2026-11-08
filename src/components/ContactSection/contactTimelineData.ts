@@ -25,7 +25,7 @@ export const CONTACT_INFO = [
     href: WHATSAPP_URL,
     whatsapp: true,
   },
-  { icon: 'clock' as const, label: 'מענה תוך 24 שעות' },
+  { icon: 'clock' as const, label: 'מענה אישי' },
   { icon: 'map' as const, label: 'ישראל' },
   {
     icon: 'mail' as const,

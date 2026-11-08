@@ -121,7 +121,7 @@ export function ServicePage() {
                 מוכנים להתחיל?
               </h2>
               <p className="mx-auto mt-4 max-w-md text-[0.9375rem] leading-relaxed text-text/55">
-                השאירו פרטים ונחזור אליכם תוך 24 שעות לשיחת אפיון ללא התחייבות.
+                השאירו פרטים ונחזור אליכם לשיחת אפיון ללא התחייבות.
               </p>
               <Link
                 to="/contact"
