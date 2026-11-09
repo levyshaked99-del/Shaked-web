@@ -15,7 +15,6 @@ const HERO_PREVIEW_FIT: Partial<
 > = {
   abnei: { objectFit: 'contain', objectPosition: 'top center' },
   noma: { objectFit: 'contain', objectPosition: 'top center' },
-  elevate: { objectFit: 'contain', objectPosition: 'top center' },
 }
 
 export const HERO_PROJECTS: HeroProject[] = PROJECTS.map(

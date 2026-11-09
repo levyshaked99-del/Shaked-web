@@ -2,6 +2,7 @@ import { useInView } from 'framer-motion'
 import { useRef } from 'react'
 import { usePrefersReducedMotion } from '../../hooks/usePrefersReducedMotion'
 import { Reveal } from '../ui/Reveal'
+import { SectionEyebrow } from '../ui/SectionEyebrow'
 import { SectionShell } from '../ui/SectionShell'
 import { WhoItsForCard } from './WhoItsForCard'
 import {
@@ -25,7 +26,7 @@ export function WhoItsForSection() {
       className="py-20 md:py-28 lg:py-32"
     >
       <Reveal variant="blur" className="text-center">
-        <p className="text-xs font-semibold tracking-[0.22em] text-story-purple/75">{WHO_ITS_FOR_EYEBROW}</p>
+        <SectionEyebrow lang="en">{WHO_ITS_FOR_EYEBROW}</SectionEyebrow>
         <h2
           id="who-its-for-heading"
           className="mx-auto mt-5 max-w-[720px] text-[clamp(1.65rem,3.4vw,2.65rem)] font-bold leading-[1.14] tracking-tight text-text"

@@ -9,7 +9,6 @@ export const DESKTOP_NAV_LINKS = [
   { label: 'ראשי', href: HOME_NAV_HREF },
   { label: 'שירותים', href: SERVICES_NAV_HREF },
   { label: 'פרויקטים', href: '/projects' },
-  { label: 'למה אנחנו', href: WHY_US_NAV_HREF },
   { label: 'יצירת קשר', href: '/contact' },
   { label: 'אודות', href: '/about' },
 ] as const
@@ -18,7 +17,6 @@ export const MOBILE_NAV_LINKS = [
   { label: 'ראשי', href: HOME_NAV_HREF },
   { label: 'שירותים', href: SERVICES_NAV_HREF },
   { label: 'פרויקטים', href: '/projects' },
-  { label: 'למה אנחנו', href: WHY_US_NAV_HREF },
   { label: 'יצירת קשר', href: '/contact' },
   { label: 'אודות', href: '/about' },
   { label: 'קבע פגישה', href: '/contact', highlight: true },

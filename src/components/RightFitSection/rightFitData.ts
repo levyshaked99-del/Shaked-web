@@ -73,7 +73,7 @@ export const AUDIENCE_OPTIONS: RightFitOption<RightFitAudience>[] = [
 
 export const CHALLENGE_OPTIONS: RightFitOption<RightFitChallenge>[] = [
   { id: 'showcase', label: 'קשה להציג את העבודות שלנו בצורה מקצועית', description: '' },
-  { id: 'irrelevant_leads', label: 'אנחנו מקבלים פניות לא מספיק רלוונטיות', description: '' },
+  { id: 'irrelevant_leads', label: 'מקבלים פניות לא מספיק רלוונטיות', description: '' },
   { id: 'referrals_only', label: 'רוב הלקוחות מגיעים דרך המלצות ורשתות חברתיות', description: '' },
   { id: 'differentiation', label: 'קשה להסביר ללקוחות מה מייחד אותנו', description: '' },
   { id: 'no_digital', label: 'עדיין אין לנו נוכחות דיגיטלית מסודרת', description: '' },

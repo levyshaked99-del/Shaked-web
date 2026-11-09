@@ -1,5 +1,6 @@
 import { useRef } from 'react'
 import { Reveal } from '../ui/Reveal'
+import { SectionEyebrow } from '../ui/SectionEyebrow'
 import { SectionShell } from '../ui/SectionShell'
 import { RightFitQuestionnaire } from './RightFitQuestionnaire'
 import { RIGHT_FIT_EYEBROW, RIGHT_FIT_HEADLINE, RIGHT_FIT_SUPPORTING } from './rightFitData'
@@ -10,7 +11,7 @@ export function RightFitSection() {
   return (
     <SectionShell ref={ref} id="right-fit" tone="bright" glow="none" className="py-20 md:py-28 lg:py-32">
       <Reveal variant="blur" className="text-center">
-        <p className="text-xs font-semibold tracking-[0.22em] text-muted">{RIGHT_FIT_EYEBROW}</p>
+        <SectionEyebrow lang="en">{RIGHT_FIT_EYEBROW}</SectionEyebrow>
         <h2
           id="right-fit-heading"
           className="mx-auto mt-5 max-w-[720px] text-[clamp(1.65rem,3.4vw,2.65rem)] font-bold leading-[1.14] tracking-tight text-text"

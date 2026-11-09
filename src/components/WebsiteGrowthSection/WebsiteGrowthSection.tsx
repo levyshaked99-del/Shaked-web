@@ -3,87 +3,57 @@ import { ChevronLeft, ChevronRight } from 'lucide-react'
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { useMinWidth } from '../../hooks/useMinWidth'
 import { EASE_PREMIUM } from '../../motion/easing'
+import { SectionEyebrow } from '../ui/SectionEyebrow'
 import { GrowthShowcaseVisual } from './GrowthShowcaseVisual'
 import { WEBSITE_GROWTH_BADGE, WEBSITE_GROWTH_BENEFITS } from './websiteGrowthData'
 import type { WebsiteGrowthBenefit } from './websiteGrowthData'
 
-const TRANSITION = { duration: 0.65, ease: EASE_PREMIUM }
+const CROSSFADE = { duration: 0.55, ease: EASE_PREMIUM }
 const AUTO_INTERVAL = 5500
 
-function BenefitFeatures({ benefit, animated }: { benefit: WebsiteGrowthBenefit; animated: boolean }) {
+function BenefitFeatures({ benefit }: { benefit: WebsiteGrowthBenefit }) {
   return (
     <ul className="mt-8 grid grid-cols-2 gap-x-4 gap-y-5 md:mt-10 md:grid-cols-2 lg:grid-cols-2">
-      {benefit.features.map((feature, index) => {
+      {benefit.features.map((feature) => {
         const Icon = feature.icon
-        const content = (
-          <>
+        return (
+          <li key={feature.label} className="flex items-start gap-3">
             <span className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-black/[0.05] bg-secondary/50">
               <Icon size={14} strokeWidth={1.5} className="text-text/45" aria-hidden />
             </span>
             <span className="text-sm font-medium leading-snug text-text/60">{feature.label}</span>
-          </>
-        )
-
-        if (!animated) {
-          return (
-            <li key={feature.label} className="flex items-start gap-3">
-              {content}
-            </li>
-          )
-        }
-
-        return (
-          <motion.li
-            key={feature.label}
-            className="flex items-start gap-3"
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ ...TRANSITION, delay: 0.08 + index * 0.05 }}
-          >
-            {content}
-          </motion.li>
+          </li>
         )
       })}
     </ul>
   )
 }
 
-function BenefitCopy({ benefit, animated }: { benefit: WebsiteGrowthBenefit; animated: boolean }) {
-  const inner = (
-    <>
-      <h2
-        id="website-growth-heading"
-        className="text-[clamp(1.75rem,3.8vw,2.85rem)] font-extrabold leading-[1.1] tracking-tight text-text"
-      >
-        {benefit.showcaseHeadline}
-      </h2>
-      <p className="mt-5 max-w-lg text-[0.9375rem] leading-[1.85] text-text/65 md:mt-6 md:text-base md:leading-[1.9]">
-        {benefit.description}
-      </p>
-      <BenefitFeatures benefit={benefit} animated={animated} />
-    </>
-  )
-
-  if (!animated) {
-    return (
-      <div key={benefit.id}>
-        {inner}
-      </div>
-    )
-  }
-
+function BenefitCopy({ benefit }: { benefit: WebsiteGrowthBenefit }) {
   return (
-    <AnimatePresence mode="wait">
-      <motion.div
-        key={benefit.id}
-        initial={{ opacity: 0, y: 18 }}
-        animate={{ opacity: 1, y: 0 }}
-        exit={{ opacity: 0, y: -14 }}
-        transition={TRANSITION}
-      >
-        {inner}
-      </motion.div>
-    </AnimatePresence>
+    <div className="grid [&>*]:col-start-1 [&>*]:row-start-1">
+      <AnimatePresence mode="sync" initial={false}>
+        <motion.div
+          key={benefit.id}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={CROSSFADE}
+          className="min-w-0"
+        >
+          <h2
+            id="website-growth-heading"
+            className="text-[clamp(1.75rem,3.8vw,2.85rem)] font-extrabold leading-[1.1] tracking-tight text-text"
+          >
+            {benefit.showcaseHeadline}
+          </h2>
+          <p className="mt-5 max-w-lg text-[0.9375rem] leading-[1.85] text-text/65 md:mt-6 md:text-base md:leading-[1.9]">
+            {benefit.description}
+          </p>
+          <BenefitFeatures benefit={benefit} />
+        </motion.div>
+      </AnimatePresence>
+    </div>
   )
 }
 
@@ -150,16 +120,26 @@ export function WebsiteGrowthSection() {
           >
             <div>
               <div className="mb-8 flex items-center justify-between md:mb-10">
-                <span className="inline-flex items-center gap-2 rounded-full border border-black/[0.05] bg-secondary/40 px-3.5 py-1.5 text-[11px] font-medium text-story-purple md:text-xs">
-                  <span className="h-1.5 w-1.5 rounded-full bg-story-purple" aria-hidden />
+                <SectionEyebrow as="span" lang="he">
                   {WEBSITE_GROWTH_BADGE}
-                </span>
+                </SectionEyebrow>
                 <span className="text-[11px] font-medium tabular-nums tracking-[0.12em] text-muted md:text-xs">
-                  {benefit.number} / {String(total).padStart(2, '0')}
+                  <AnimatePresence mode="sync" initial={false}>
+                    <motion.span
+                      key={benefit.number}
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      exit={{ opacity: 0 }}
+                      transition={CROSSFADE}
+                      className="inline-block"
+                    >
+                      {benefit.number} / {String(total).padStart(2, '0')}
+                    </motion.span>
+                  </AnimatePresence>
                 </span>
               </div>
 
-              <BenefitCopy benefit={benefit} animated />
+              <BenefitCopy benefit={benefit} />
             </div>
 
             <div className="mt-10 flex items-center justify-between gap-4 md:mt-12 lg:mt-0">

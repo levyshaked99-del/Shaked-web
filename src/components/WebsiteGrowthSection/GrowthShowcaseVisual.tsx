@@ -12,7 +12,7 @@ const CARD_SLOTS = [
   { top: '50%', left: '14%', x: '-50%', y: '-50%' },
 ] as const
 
-const TRANSITION = { duration: 0.65, ease: EASE_PREMIUM }
+const CROSSFADE = { duration: 0.55, ease: EASE_PREMIUM }
 
 interface GrowthShowcaseVisualProps {
   benefitId: string
@@ -44,37 +44,20 @@ function OrbitCard({
   label,
   icon,
   index,
-  animate,
 }: {
   label: string
   icon: LucideIcon
   index: number
-  animate: boolean
 }) {
   const slot = CARD_SLOTS[index]
 
-  if (!animate) {
-    return (
-      <div
-        className="absolute z-10 w-[28%] min-w-[88px] max-w-[120px]"
-        style={{ top: slot.top, left: slot.left, transform: 'translate(-50%, -50%)' }}
-      >
-        <OrbitCardInner label={label} icon={icon} />
-      </div>
-    )
-  }
-
   return (
-    <motion.div
+    <div
       className="absolute z-10 w-[28%] min-w-[88px] max-w-[120px]"
-      style={{ top: slot.top, left: slot.left, x: slot.x, y: slot.y }}
-      initial={{ opacity: 0, scale: 0.92, y: index === 0 ? -8 : index === 2 ? 8 : 0 }}
-      animate={{ opacity: 1, scale: 1, y: slot.y }}
-      exit={{ opacity: 0, scale: 0.92 }}
-      transition={{ ...TRANSITION, delay: index * 0.06 }}
+      style={{ top: slot.top, left: slot.left, transform: 'translate(-50%, -50%)' }}
     >
       <OrbitCardInner label={label} icon={icon} />
-    </motion.div>
+    </div>
   )
 }
 
@@ -132,59 +115,49 @@ export function GrowthShowcaseVisual({
       )}
 
       {animate ? (
-        <AnimatePresence mode="wait">
+        <AnimatePresence mode="sync" initial={false}>
           <motion.div
             key={benefitId}
             className="absolute inset-0"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.45, ease: EASE_PREMIUM }}
+            transition={CROSSFADE}
           >
             {cards.map((card, index) => (
-              <OrbitCard
-                key={card.label}
-                label={card.label}
-                icon={card.icon}
-                index={index}
-                animate
-              />
+              <OrbitCard key={card.label} label={card.label} icon={card.icon} index={index} />
             ))}
           </motion.div>
         </AnimatePresence>
       ) : (
         <div key={benefitId} className="absolute inset-0">
           {cards.map((card, index) => (
-            <OrbitCard
-              key={card.label}
-              label={card.label}
-              icon={card.icon}
-              index={index}
-              animate={false}
-            />
+            <OrbitCard key={card.label} label={card.label} icon={card.icon} index={index} />
           ))}
         </div>
       )}
 
       <div className="absolute left-1/2 top-1/2 z-20 flex h-[38%] w-[38%] min-h-[120px] min-w-[120px] -translate-x-1/2 -translate-y-1/2 flex-col items-center justify-center rounded-full border border-story-purple/25 bg-white shadow-[0_8px_40px_-12px_rgba(0,0,0,0.12)]">
-        {animate ? (
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={`${benefitId}-hub`}
-              className="flex flex-col items-center px-4 text-center"
-              initial={{ opacity: 0, scale: 0.94, y: 6 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.96, y: -6 }}
-              transition={{ duration: 0.55, ease: EASE_PREMIUM }}
-            >
+        <div className="grid w-full [&>*]:col-start-1 [&>*]:row-start-1">
+          {animate ? (
+            <AnimatePresence mode="sync" initial={false}>
+              <motion.div
+                key={`${benefitId}-hub`}
+                className="flex flex-col items-center px-4 text-center"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={CROSSFADE}
+              >
+                <HubContent hubLabel={hubLabel} hubSubtitle={hubSubtitle} />
+              </motion.div>
+            </AnimatePresence>
+          ) : (
+            <div key={`${benefitId}-hub`} className="flex flex-col items-center px-4 text-center">
               <HubContent hubLabel={hubLabel} hubSubtitle={hubSubtitle} />
-            </motion.div>
-          </AnimatePresence>
-        ) : (
-          <div key={`${benefitId}-hub`} className="flex flex-col items-center px-4 text-center">
-            <HubContent hubLabel={hubLabel} hubSubtitle={hubSubtitle} />
-          </div>
-        )}
+            </div>
+          )}
+        </div>
       </div>
     </div>
   )

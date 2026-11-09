@@ -112,43 +112,4 @@ export const PROJECTS: Project[] = [
       ],
     },
   },
-  {
-    id: 'elevate',
-    number: '03',
-    title: 'ELEVATE',
-    conceptLabel: 'CONCEPT PROJECT 03',
-    industryEn: 'Fitness & Personal Coaching',
-    industryLine: 'אתר קונספט למותג אימון אישי וליווי כושר',
-    category: 'כושר ואימון אישי · דף נחיתה פרימיום',
-    conceptDescription:
-      'אתר קונספט למותג אימון אישי וליווי כושר, עם דגש על שפה ויזואלית חזקה, הצגת שיטת האימון והנעת משתמשים להשארת פנייה.',
-    capabilities: ['Product Design', 'UI/UX', 'Web Development'],
-    href: 'https://elevate-fitness-livid.vercel.app/',
-    externalUrl: 'https://elevate-fitness-livid.vercel.app/',
-    preview: 'image',
-    previewImage: '/projects/elevate.png',
-    previewPresentation: { fit: 'contain', position: 'top center', background: 'secondary' },
-    isDemo: true,
-    caseStudy: {
-      disclaimer:
-        'פרויקט קונספט ודמו. המלצות ומספרים באתר הם תוכן פיקטיבי — לא תוצאות לקוח אמיתיות.',
-      conceptRationale:
-        'מותג אימון פרימיום דורש רצינות ומיקוד — לא תחושת מאמן כושר גנרי. הקונספט משלב צילום עורי, מסר באנגלית ודגש אחד: הגשה לליווי.',
-      objectives: [
-        'לבנות אמון לפני שלב הרישום',
-        'להציג שיטת ליווי במבנה קריא',
-        'להניע להגשת בקשה כפעולה ראשית',
-      ],
-      uxDecisions: [
-        'הירו ספליט: מסר ו-CTA מול אימון ויזואלי',
-        'מונכרום עם accent בכפתורי פעולה בלבד',
-        'מסלול LTR: שיטה, חוויה, ולסיום CTA להגשה',
-      ],
-      verifiedImplementation: [
-        'אתר דמו חי בכתובת elevate-fitness-livid.vercel.app',
-        'פריסה רספונסיבית למובייל ולדסקטופ',
-        'ממשק באנגלית עם כיוון LTR',
-      ],
-    },
-  },
 ]

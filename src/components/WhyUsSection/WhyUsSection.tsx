@@ -3,6 +3,7 @@ import { ChevronLeft } from 'lucide-react'
 import { Fragment, useCallback, useEffect, useRef, useState } from 'react'
 import { usePrefersReducedMotion } from '../../hooks/usePrefersReducedMotion'
 import { EASE_PREMIUM } from '../../motion/easing'
+import { SectionEyebrow } from '../ui/SectionEyebrow'
 import { ProcessShowcaseVisual } from './ProcessShowcase/ProcessShowcaseVisual'
 import { WhyUsProcessCard } from './WhyUsProcessCard'
 import {
@@ -102,11 +103,6 @@ export function WhyUsSection() {
       onFocus={() => setPaused(true)}
       onBlur={() => setPaused(false)}
     >
-      <div
-        className="pointer-events-none absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-secondary/80 to-transparent"
-        aria-hidden
-      />
-
       <div className="mx-auto max-w-[1280px]">
         <div className="grid grid-cols-1 items-center gap-8 lg:grid-cols-2 lg:gap-16 xl:gap-24 lg:[direction:ltr]">
           <div className="hidden md:flex md:order-2 md:items-center md:justify-center lg:order-none lg:col-start-1 lg:row-start-1">
@@ -122,10 +118,9 @@ export function WhyUsSection() {
               className="mb-8 md:mb-16 lg:mb-20"
             >
               <div className="mb-5 flex items-center justify-between md:mb-10">
-                <span className="inline-flex items-center gap-2 rounded-full border border-black/[0.05] bg-secondary/40 px-3.5 py-1.5 text-[11px] font-medium text-story-purple/65 md:text-xs">
-                  <span className="h-1.5 w-1.5 rounded-full bg-story-purple" aria-hidden />
+                <SectionEyebrow as="span" lang="he">
                   {WHY_US_EYEBROW}
-                </span>
+                </SectionEyebrow>
                 <motion.span
                   key={activeIndex}
                   className="text-[11px] font-medium tabular-nums tracking-[0.12em] text-muted md:text-xs"

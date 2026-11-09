@@ -16,7 +16,7 @@ export function ServicesWebsiteFitSection() {
       className="relative overflow-hidden bg-white px-6 pb-10 pt-28 scroll-mt-24 md:px-10 md:pb-12 md:pt-32 lg:px-16 lg:pb-14 lg:pt-36"
     >
       <div
-        className="pointer-events-none absolute inset-x-0 top-0 h-28 bg-gradient-to-b from-secondary to-transparent"
+        className="pointer-events-none absolute inset-x-0 top-0 h-28 bg-gradient-to-b from-white to-transparent"
         aria-hidden
       />
 

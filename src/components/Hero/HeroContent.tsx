@@ -16,7 +16,7 @@ export function HeroContent() {
         variants={staggerItemBlur}
         className="mb-5 text-sm font-medium tracking-wide text-muted"
       >
-        אנחנו הופכים נכסים דיגיטליים למנועי צמיחה.
+        הופכים נכסים דיגיטליים למנועי צמיחה.
       </motion.p>
 
       <motion.h1
@@ -34,8 +34,7 @@ export function HeroContent() {
         variants={staggerItemBlur}
         className="mt-5 max-w-sm text-[0.9375rem] leading-relaxed text-text/65 md:text-base"
       >
-        אנחנו מתכננים, מעצבים ומפתחים אתרים שעוזרים לעסקים לבלוט, לבנות אמון
-        ולהפוך יותר מבקרים ללקוחות.
+        הפרויקטים שלכם מדברים בעד עצמם. אנחנו רק נותנים להם את הבמה הנכונה.
       </motion.p>
 
       <motion.div variants={staggerItemBlur} className="mt-7 flex flex-wrap items-center gap-3.5">

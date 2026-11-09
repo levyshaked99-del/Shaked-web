@@ -11,7 +11,7 @@ export const WHO_ITS_FOR_EYEBROW = "WHO IT'S FOR"
 export const WHO_ITS_FOR_HEADLINE = 'אתרים שמדברים בשפת העיצוב, האדריכלות והביצוע.'
 
 export const WHO_ITS_FOR_SUPPORTING =
-  'אנחנו מביאים התמחות וניסיון מעולמות העיצוב, האדריכלות והשיפוצים — ויוצרים פתרונות דיגיטליים לעסקים שרוצים לקחת את הנוכחות שלהם קדימה.'
+  'מביאים התמחות וניסיון מעולמות העיצוב, האדריכלות והשיפוצים — ויוצרים פתרונות דיגיטליים לעסקים שרוצים לקחת את הנוכחות שלהם קדימה.'
 
 export const WHO_ITS_FOR_AUDIENCES: WhoItsForAudience[] = [
   {

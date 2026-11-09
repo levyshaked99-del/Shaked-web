@@ -51,10 +51,6 @@ export function Hero() {
         <span className="text-xs text-muted">גלול למטה</span>
       </motion.div>
 
-      <div
-        className="pointer-events-none absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-secondary/80 to-transparent"
-        aria-hidden
-      />
     </motion.section>
   )
 }
