@@ -94,7 +94,7 @@ export function WebsiteGrowthSection() {
     <section
       ref={sectionRef}
       id="website-growth"
-      className="relative overflow-hidden bg-white px-6 py-28 md:px-10 md:py-36 lg:px-16 lg:py-40"
+      className="relative overflow-hidden bg-white px-6 py-16 md:px-10 md:py-36 lg:px-16 lg:py-40"
       aria-labelledby="website-growth-heading"
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}

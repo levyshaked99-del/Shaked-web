@@ -37,7 +37,7 @@ export function WhoItsForCard({ audience, index, inView, reducedMotion }: WhoIts
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
     >
-      <div className="relative aspect-[4/3] overflow-hidden bg-secondary">
+      <div className="relative h-[200px] overflow-hidden bg-secondary md:aspect-[4/3] md:h-auto">
         <img
           src={audience.imageSrc}
           alt={audience.imageAlt}

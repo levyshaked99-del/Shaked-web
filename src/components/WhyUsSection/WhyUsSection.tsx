@@ -96,7 +96,7 @@ export function WhyUsSection() {
     <section
       ref={sectionRef}
       id="why-us"
-      className="relative scroll-mt-28 overflow-hidden bg-white px-6 py-20 md:px-10 md:py-36 lg:px-16 lg:py-40"
+      className="relative scroll-mt-28 overflow-hidden bg-white px-6 py-16 md:px-10 md:py-36 lg:px-16 lg:py-40"
       aria-labelledby="why-us-heading"
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}

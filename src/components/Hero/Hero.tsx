@@ -7,14 +7,25 @@ import { HeroShowcase } from './HeroShowcase'
 export function Hero() {
   return (
     <motion.section
+      id="hero"
       className="relative min-h-screen overflow-hidden bg-white"
       aria-label="דף הבית"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.5, ease: [0.25, 0.1, 0.25, 1] }}
     >
-      <GlowOrb tone="blue" size="xl" opacity={0.06} className="-right-[15%] top-[10%]" />
-      <GlowOrb tone="violet" size="lg" opacity={0.04} className="-left-[10%] top-[40%]" />
+      <GlowOrb
+        tone="blue"
+        size="xl"
+        opacity={0.06}
+        className="-right-[15%] top-[10%] max-md:hidden"
+      />
+      <GlowOrb
+        tone="violet"
+        size="lg"
+        opacity={0.04}
+        className="-left-[10%] top-[40%] max-md:hidden"
+      />
       <GlowOrb tone="dual" size="md" opacity={0.05} className="right-[20%] bottom-[15%] hidden lg:block" />
 
       <div

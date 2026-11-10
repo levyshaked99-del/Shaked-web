@@ -23,7 +23,7 @@ export function WhoItsForSection() {
       id="who-its-for"
       tone="bright"
       glow="none"
-      className="py-20 md:py-28 lg:py-32"
+      className="md:py-28 lg:py-32"
     >
       <Reveal variant="blur" className="text-center">
         <SectionEyebrow lang="en">{WHO_ITS_FOR_EYEBROW}</SectionEyebrow>
@@ -39,11 +39,14 @@ export function WhoItsForSection() {
       </Reveal>
 
       <ul
-        className="mt-12 grid grid-cols-1 gap-5 sm:grid-cols-2 sm:gap-5 lg:mt-16 lg:grid-cols-4 lg:gap-6"
+        className="who-its-for-rail -mx-6 mt-10 flex gap-4 overflow-x-auto px-6 pb-1 scroll-smooth snap-x snap-mandatory [scrollbar-width:none] md:mx-0 md:mt-12 md:grid md:grid-cols-2 md:gap-5 md:overflow-visible md:px-0 md:pb-0 md:snap-none lg:mt-16 lg:grid-cols-4 lg:gap-6 [&::-webkit-scrollbar]:hidden"
         aria-labelledby="who-its-for-heading"
       >
         {WHO_ITS_FOR_AUDIENCES.map((audience, index) => (
-          <li key={audience.id} className="list-none">
+          <li
+            key={audience.id}
+            className="w-[80%] shrink-0 snap-start list-none max-md:last:pe-6 md:w-auto md:shrink"
+          >
             <WhoItsForCard
               audience={audience}
               index={index}

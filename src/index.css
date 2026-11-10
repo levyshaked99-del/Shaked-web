@@ -14,7 +14,7 @@
     scroll-padding-top: 5.5rem;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    overflow-x: clip;
+    overflow-x: hidden;
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -36,13 +36,13 @@
     font-family: 'Heebo', system-ui, sans-serif;
     color: #111111;
     background: #ffffff;
-    overflow-x: clip;
+    overflow-x: hidden;
     max-width: 100%;
   }
 
   #root {
     min-height: 100vh;
-    overflow-x: clip;
+    overflow-x: hidden;
   }
 
   :focus-visible {

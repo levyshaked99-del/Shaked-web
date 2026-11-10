@@ -20,7 +20,7 @@ export const SectionShell = forwardRef<HTMLElement, SectionShellProps>(function 
     <section
       ref={ref}
       id={id}
-      className={`relative overflow-hidden bg-white px-6 py-24 md:px-10 md:py-32 lg:px-16 lg:py-40 ${className}`}
+      className={`relative overflow-hidden bg-white px-6 py-16 md:px-10 md:py-32 lg:px-16 lg:py-40 ${className}`}
     >
       {glow === 'violet' && (
         <GlowOrb

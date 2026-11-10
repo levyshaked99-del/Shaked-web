@@ -23,9 +23,14 @@ export function MobileMenu({ open, onClose, menuButtonId }: MobileMenuProps) {
 
   useEffect(() => {
     if (!open) return
+    const { style } = document.documentElement
+    const prevHtmlOverflow = style.overflow
+    const prevBodyOverflow = document.body.style.overflow
+    style.overflow = 'hidden'
     document.body.style.overflow = 'hidden'
     return () => {
-      document.body.style.overflow = ''
+      style.overflow = prevHtmlOverflow
+      document.body.style.overflow = prevBodyOverflow
     }
   }, [open])
 
@@ -38,7 +43,7 @@ export function MobileMenu({ open, onClose, menuButtonId }: MobileMenuProps) {
   return (
     <AnimatePresence>
       {open && (
-        <div className="fixed inset-0 z-[100] lg:hidden">
+        <div className="fixed inset-0 z-[100] overflow-hidden lg:hidden">
           <motion.button
             type="button"
             aria-label="סגור תפריט"
@@ -56,10 +61,10 @@ export function MobileMenu({ open, onClose, menuButtonId }: MobileMenuProps) {
             role="dialog"
             aria-modal="true"
             aria-labelledby={titleId}
-            className="absolute inset-y-0 right-0 flex w-full flex-col bg-white shadow-depth-lg"
-            initial={{ x: '100%' }}
+            className="absolute inset-y-0 left-0 flex w-full max-w-full flex-col bg-white shadow-depth-lg will-change-transform"
+            initial={{ x: '-100%' }}
             animate={{ x: 0 }}
-            exit={{ x: '100%' }}
+            exit={{ x: '-100%' }}
             transition={{ duration: 0.45, ease: EASE_PREMIUM }}
           >
             <div className="flex items-center justify-between px-6 pb-2 pt-6">
@@ -137,7 +142,7 @@ export function MobileMenu({ open, onClose, menuButtonId }: MobileMenuProps) {
             </motion.nav>
 
             <div className="border-t border-black/[0.06] px-8 py-6">
-              <p className="text-center text-xs text-muted">שקד לוי · בניית אתרים לעסקים</p>
+              <p className="text-center text-xs text-muted">שקד לוי · אתרים לעולם העיצוב והשיפוצים</p>
             </div>
           </motion.div>
         </div>

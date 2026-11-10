@@ -71,10 +71,19 @@ export function Footer({ showCta = true }: FooterProps) {
       transition={{ duration: 0.8, ease: EASE_PREMIUM }}
     >
       <GlowOrb tone="violet" size="lg" opacity={0.03} className="-left-[8%] top-[12%] hidden md:block" aria-hidden />
-      <GlowOrb tone="blue" size="md" opacity={0.025} className="-right-[6%] bottom-[30%]" aria-hidden />
+      <GlowOrb
+        tone="blue"
+        size="md"
+        opacity={0.025}
+        className="-right-[6%] bottom-[30%] hidden md:block"
+        aria-hidden
+      />
 
       {showCta && (
-        <div className="relative mx-auto max-w-[1100px] px-6 py-24 md:px-10 md:py-32 lg:px-16 lg:py-40">
+        <div
+          id="footer-cta"
+          className="relative mx-auto max-w-[1100px] px-6 py-16 md:px-10 md:py-32 lg:px-16 lg:py-40"
+        >
           <motion.div
             className="mx-auto max-w-2xl text-center"
             variants={staggerContainer(0.1, 0.05)}
@@ -92,9 +101,7 @@ export function Footer({ showCta = true }: FooterProps) {
               variants={staggerItem}
               className="mx-auto mt-6 max-w-lg text-[0.9375rem] leading-[1.85] text-text/60 md:text-base md:leading-[1.85]"
             >
-              אם יש לך רעיון, עסק קיים או אתר שצריך שדרוג,
-              <br className="hidden sm:block" />
-              אשמח לשמוע ולעזור לך להבין מה הצעד הבא.
+              אם יש לך רעיון, עסק קיים או אתר שצריך שדרוג, אשמח לשמוע ולעזור לך להבין מה הצעד הבא.
             </motion.p>
 
             <motion.div
@@ -141,30 +148,39 @@ export function Footer({ showCta = true }: FooterProps) {
 
       <div
         className={`relative mx-auto max-w-[1100px] px-6 md:px-10 lg:px-16 ${
-          showCta ? 'py-20 md:py-24 lg:py-28' : 'pb-20 pt-24 md:pb-24 md:pt-28 lg:pb-28 lg:pt-32'
+          showCta ? 'py-12 md:py-24 lg:py-28' : 'pb-20 pt-24 md:pb-24 md:pt-28 lg:pb-28 lg:pt-32'
         }`}
       >
         <motion.div
-          className="grid grid-cols-1 gap-14 text-center md:grid-cols-3 md:gap-10 md:text-right"
+          className="flex flex-col gap-10 text-center md:grid md:grid-cols-3 md:gap-10 md:text-right"
           variants={staggerContainer(0.08, 0.1)}
           initial="hidden"
           animate={inView ? 'visible' : 'hidden'}
         >
-          <motion.div variants={staggerItem} className="flex flex-col items-center md:items-start">
+          <motion.div
+            variants={staggerItem}
+            className="flex flex-wrap items-center justify-center gap-x-2 gap-y-1 md:flex-col md:items-start"
+          >
             <Link to="/" className="transition-opacity duration-300 hover:opacity-80">
               <span className="text-base font-bold tracking-tight text-text">שקד לוי</span>
             </Link>
-            <p className="mt-2 text-sm text-muted">בניית אתרים לעסקים</p>
+            <span className="text-muted md:hidden" aria-hidden>
+              ·
+            </span>
+            <p className="text-sm text-muted md:mt-2">אתרים לעולם העיצוב והשיפוצים</p>
           </motion.div>
 
           <motion.div variants={staggerItem} className="flex flex-col items-center md:items-start">
-            <p id="footer-nav-heading" className="text-xs font-semibold tracking-[0.22em] text-muted">
+            <p
+              id="footer-nav-heading"
+              className="hidden text-xs font-semibold tracking-[0.22em] text-muted md:block"
+            >
               ניווט
             </p>
             <nav aria-labelledby="footer-nav-heading">
-              <ul className="mt-5 flex flex-col items-center gap-3 md:items-start">
+              <ul className="grid w-full max-w-sm grid-cols-2 gap-x-4 gap-y-1 md:mt-5 md:flex md:max-w-none md:flex-col md:items-start md:gap-3">
                 {NAV_LINKS.map(({ label, href }) => (
-                  <li key={label}>
+                  <li key={label} className="flex min-h-11 items-center justify-center md:min-h-0 md:justify-start">
                     <FooterLink to={href}>{label}</FooterLink>
                   </li>
                 ))}
@@ -173,16 +189,22 @@ export function Footer({ showCta = true }: FooterProps) {
           </motion.div>
 
           <motion.div variants={staggerItem} className="flex flex-col items-center md:items-start">
-            <p id="footer-contact-heading" className="text-xs font-semibold tracking-[0.22em] text-muted">
+            <p
+              id="footer-contact-heading"
+              className="text-xs font-semibold tracking-[0.22em] text-muted md:block"
+            >
               יצירת קשר
             </p>
-            <ul className="mt-5 flex flex-col items-center gap-3 md:items-start" aria-labelledby="footer-contact-heading">
-              <li>
+            <ul
+              className="mt-4 flex flex-col items-center gap-3 md:mt-5 md:items-start"
+              aria-labelledby="footer-contact-heading"
+            >
+              <li className="flex min-h-11 items-center md:min-h-0">
                 <ContactLine href={`mailto:${CONTACT_EMAIL}`} dir="ltr">
                   {CONTACT_EMAIL}
                 </ContactLine>
               </li>
-              <li>
+              <li className="flex min-h-11 items-center md:min-h-0">
                 <ContactLine href={CONTACT_PHONE_HREF} dir="ltr">
                   {CONTACT_PHONE}
                 </ContactLine>
@@ -197,13 +219,9 @@ export function Footer({ showCta = true }: FooterProps) {
 
         <div className="flex flex-col items-center gap-3 pt-8 text-center text-xs text-muted md:flex-row md:justify-between md:pt-10" dir="ltr">
           <span>© 2026 Shaked Levy</span>
-          <span dir="rtl" className="flex flex-wrap items-center justify-center gap-x-3 gap-y-1">
-            <Link to="/accessibility" className="transition-colors hover:text-text">
+            <Link to="/accessibility" className="transition-colors hover:text-text" dir="rtl">
               הצהרת נגישות
             </Link>
-            <span aria-hidden>·</span>
-            <span>נבנה עם React + Vite</span>
-          </span>
         </div>
       </div>
     </motion.footer>

@@ -9,7 +9,7 @@ export function RightFitSection() {
   const ref = useRef<HTMLElement>(null)
 
   return (
-    <SectionShell ref={ref} id="right-fit" tone="bright" glow="none" className="py-20 md:py-28 lg:py-32">
+    <SectionShell ref={ref} id="right-fit" tone="bright" glow="none" className="md:py-28 lg:py-32">
       <Reveal variant="blur" className="text-center">
         <SectionEyebrow lang="en">{RIGHT_FIT_EYEBROW}</SectionEyebrow>
         <h2
