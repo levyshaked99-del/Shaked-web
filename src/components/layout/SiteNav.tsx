@@ -57,7 +57,7 @@ export function SiteNav({ animate = true, fixed = false }: SiteNavProps) {
         <div className="mx-auto flex max-w-[1440px] items-center justify-between gap-4">
           <Link to="/" className="flex min-w-0 shrink flex-col transition-opacity duration-300 hover:opacity-80">
             <span className="text-base font-bold tracking-tight text-text">שקד לוי</span>
-            <span className="hidden min-[400px]:block text-xs text-muted">בניית אתרים לעסקים</span>
+            <span className="hidden min-[400px]:block text-xs text-muted">אתרים לעולם העיצוב והשיפוצים</span>
           </Link>
 
           <nav className="hidden items-center gap-8 lg:flex" aria-label="ניווט ראשי">

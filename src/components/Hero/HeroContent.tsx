@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { ArrowLeft } from 'lucide-react'
+import { WHATSAPP_URL } from '../../constants/contact'
 import { staggerContainer, staggerItemBlur } from '../../motion/variants'
 import { Metrics } from './Metrics'
 
@@ -16,18 +17,18 @@ export function HeroContent() {
         variants={staggerItemBlur}
         className="mb-5 text-sm font-medium tracking-wide text-muted"
       >
-        הופכים נכסים דיגיטליים למנועי צמיחה.
+        אתרים למעצבי פנים, אדריכלים וקבלני שיפוצים
       </motion.p>
 
       <motion.h1
         variants={staggerItemBlur}
         className="max-w-md text-[clamp(2.15rem,4.2vw,3.65rem)] font-extrabold leading-[1.08] tracking-tight text-text"
       >
-        אתר מצוין
+        האתר שלכם
         <br />
-        גורם לאנשים
+        צריך להיראות
         <br />
-        לבחור בך.
+        כמו הפרויקטים.
       </motion.h1>
 
       <motion.p
@@ -38,18 +39,20 @@ export function HeroContent() {
       </motion.p>
 
       <motion.div variants={staggerItemBlur} className="mt-7 flex flex-wrap items-center gap-3.5">
-        <Link
-          to="/contact"
+        <a
+          href={WHATSAPP_URL}
+          target="_blank"
+          rel="noopener noreferrer"
           className="group inline-flex items-center gap-2 rounded-full bg-accent px-7 py-3.5 text-sm font-semibold text-white shadow-depth-md transition-shadow duration-300 hover:shadow-depth-lg"
         >
-          קבלו הצעת מחיר
+          קבלו הדמיה בחינם
           <ArrowLeft
             size={14}
             strokeWidth={2}
             className="transition-transform duration-300 group-hover:-translate-x-0.5 group-hover:text-brand/80"
             aria-hidden
           />
-        </Link>
+        </a>
 
         <Link
           to="/services"
