@@ -6,7 +6,7 @@ import {
   CONTACT_EMAIL,
   CONTACT_PHONE,
   CONTACT_PHONE_HREF,
-  WHATSAPP_URL_SHORT,
+  WHATSAPP_URL,
 } from '../../constants/contact'
 import { EASE_PREMIUM } from '../../motion/easing'
 import { staggerContainer, staggerItem } from '../../motion/variants'
@@ -25,7 +25,7 @@ function FooterLink({ to, children }: { to: string; children: ReactNode }) {
   return (
     <Link
       to={to}
-      className="group relative inline-block text-sm text-text/60 transition-colors duration-300 hover:text-text"
+      className="group relative inline-flex max-md:min-h-11 max-md:items-center max-md:justify-center max-md:py-2 text-sm text-text/60 transition-colors duration-300 hover:text-text"
     >
       {children}
       <span className="absolute -bottom-0.5 right-0 h-px w-0 bg-text/25 transition-all duration-300 group-hover:w-full" aria-hidden />
@@ -46,7 +46,7 @@ function ContactLine({
     <a
       href={href}
       dir={dir}
-      className="group relative inline-block text-sm text-text/60 transition-colors duration-300 hover:text-text"
+      className="group relative inline-flex max-md:min-h-11 max-md:items-center max-md:justify-center max-md:py-2 text-sm text-text/60 transition-colors duration-300 hover:text-text"
     >
       {children}
       <span className="absolute -bottom-0.5 right-0 h-px w-0 bg-text/25 transition-all duration-300 group-hover:w-full" aria-hidden />
@@ -94,24 +94,37 @@ export function Footer({ showCta = true }: FooterProps) {
               variants={staggerItem}
               className="text-[clamp(2rem,4.5vw,3.25rem)] font-extrabold leading-[1.08] tracking-tight text-text"
             >
-              בוא נבנה משהו יוצא דופן.
+              רוצים לראות איך האתר שלכם ייראה?
             </motion.h2>
 
             <motion.p
               variants={staggerItem}
               className="mx-auto mt-6 max-w-lg text-[0.9375rem] leading-[1.85] text-text/60 md:text-base md:leading-[1.85]"
             >
-              אם יש לך רעיון, עסק קיים או אתר שצריך שדרוג, אשמח לשמוע ולעזור לך להבין מה הצעד הבא.
+              שלחו הודעה, ותקבלו הדמיה של דף הבית, בחינם וללא התחייבות.
             </motion.p>
 
             <motion.div
               variants={staggerItem}
               className="mt-10 flex flex-wrap items-center justify-center gap-3.5"
             >
+              <motion.a
+                href={WHATSAPP_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="קבלו הדמיה בחינם — נפתח בוואטסאפ בחלון חדש"
+                className="group inline-flex items-center gap-2 rounded-full bg-accent px-8 py-3.5 text-sm font-semibold text-white shadow-depth-md transition-shadow duration-300 hover:shadow-depth-lg"
+                whileHover={{ y: -2 }}
+                whileTap={{ scale: 0.98 }}
+              >
+                <WhatsAppIcon size={15} className="text-white/90" />
+                קבלו הדמיה בחינם
+              </motion.a>
+
               <motion.div whileHover={{ y: -2 }} whileTap={{ scale: 0.98 }}>
                 <Link
                   to="/contact"
-                  className="group inline-flex items-center gap-2 rounded-full bg-accent px-8 py-3.5 text-sm font-semibold text-white shadow-depth-md transition-shadow duration-300 hover:shadow-depth-lg"
+                  className="group inline-flex items-center gap-2 rounded-full border border-black/[0.1] bg-white px-7 py-3.5 text-sm font-medium text-text/75 shadow-depth-sm transition-all duration-300 hover:border-black/[0.14] hover:text-text hover:shadow-depth-md"
                 >
                   קבע פגישה
                   <ArrowLeft
@@ -122,19 +135,6 @@ export function Footer({ showCta = true }: FooterProps) {
                   />
                 </Link>
               </motion.div>
-
-              <motion.a
-                href={WHATSAPP_URL_SHORT}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="דברו איתי בוואטסאפ — נפתח בחלון חדש"
-                className="group inline-flex items-center gap-2 rounded-full border border-black/[0.1] bg-white px-7 py-3.5 text-sm font-medium text-text/75 shadow-depth-sm transition-all duration-300 hover:border-[#4D7C5F]/25 hover:text-text hover:shadow-glow-green-soft"
-                whileHover={{ y: -2 }}
-                whileTap={{ scale: 0.98 }}
-              >
-                <WhatsAppIcon size={15} className="text-[#5C8A6E]/70 transition-colors duration-300 group-hover:text-[#4D7C5F]" />
-                דברו איתי בוואטסאפ
-              </motion.a>
             </motion.div>
           </motion.div>
         </div>

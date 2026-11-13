@@ -92,49 +92,70 @@ export function MobileMenu({ open, onClose, menuButtonId }: MobileMenuProps) {
                 {MOBILE_NAV_LINKS.map((item) => {
                   const active = isNavLinkActive(pathname, hash, item.href, item.label)
                   const isHighlight = 'highlight' in item && item.highlight
+                  const isExternal = 'external' in item && item.external
                   const onContactPage = pathname === '/contact'
+                  const linkClassName = `group relative block py-1 transition-colors duration-300 ${
+                    isHighlight && onContactPage
+                      ? 'text-text'
+                      : isHighlight && !active
+                        ? 'text-text/85'
+                        : active
+                          ? 'text-text'
+                          : 'text-text/60 hover:text-text/80'
+                  }`
+                  const linkBody = (
+                    <>
+                      {active && (
+                        <motion.span
+                          layoutId="mobile-nav-indicator"
+                          className="absolute -right-4 top-1/2 h-5 w-0.5 -translate-y-1/2 rounded-full bg-gradient-to-b from-brand to-brand-violet"
+                          transition={{ type: 'spring', stiffness: 380, damping: 32 }}
+                          aria-hidden
+                        />
+                      )}
+                      <span
+                        className={`block text-[clamp(1.65rem,6vw,2rem)] font-bold leading-tight tracking-tight ${
+                          isHighlight ? 'font-extrabold' : ''
+                        }`}
+                      >
+                        {item.label}
+                      </span>
+                      {isHighlight && (
+                        <span className="mt-1 block text-xs font-medium text-muted">
+                          {'highlightSubline' in item && item.highlightSubline
+                            ? item.highlightSubline
+                            : 'פגישת אפיון ללא התחייבות'}
+                        </span>
+                      )}
+                    </>
+                  )
 
                   return (
                     <motion.li key={item.label} variants={staggerItem}>
-                      <Link
-                        to={item.href}
-                        onClick={(event) => {
-                          const handler = getNavClickHandler(item.href, pathname, navigate)
-                          handler?.(event)
-                          onClose()
-                        }}
-                        aria-current={active ? 'page' : undefined}
-                        className={`group relative block py-1 transition-colors duration-300 ${
-                          isHighlight && onContactPage
-                            ? 'text-text'
-                            : isHighlight && !active
-                              ? 'text-text/85'
-                              : active
-                                ? 'text-text'
-                                : 'text-text/60 hover:text-text/80'
-                        }`}
-                      >
-                        {active && (
-                          <motion.span
-                            layoutId="mobile-nav-indicator"
-                            className="absolute -right-4 top-1/2 h-5 w-0.5 -translate-y-1/2 rounded-full bg-gradient-to-b from-brand to-brand-violet"
-                            transition={{ type: 'spring', stiffness: 380, damping: 32 }}
-                            aria-hidden
-                          />
-                        )}
-                        <span
-                          className={`block text-[clamp(1.65rem,6vw,2rem)] font-bold leading-tight tracking-tight ${
-                            isHighlight ? 'font-extrabold' : ''
-                          }`}
+                      {isExternal ? (
+                        <a
+                          href={item.href}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          onClick={() => onClose()}
+                          className={linkClassName}
                         >
-                          {item.label}
-                        </span>
-                        {isHighlight && (
-                          <span className="mt-1 block text-xs font-medium text-muted">
-                            פגישת אפיון ללא התחייבות
-                          </span>
-                        )}
-                      </Link>
+                          {linkBody}
+                        </a>
+                      ) : (
+                        <Link
+                          to={item.href}
+                          onClick={(event) => {
+                            const handler = getNavClickHandler(item.href, pathname, navigate)
+                            handler?.(event)
+                            onClose()
+                          }}
+                          aria-current={active ? 'page' : undefined}
+                          className={linkClassName}
+                        >
+                          {linkBody}
+                        </Link>
+                      )}
                     </motion.li>
                   )
                 })}
