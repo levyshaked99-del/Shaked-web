@@ -98,16 +98,32 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     return res.status(405).json({ error: 'method_not_allowed' })
   }
 
-  const body = typeof req.body === 'string' ? JSON.parse(req.body) : req.body
+  let body: unknown = req.body
+  if (typeof body === 'string') {
+    try {
+      body = JSON.parse(body)
+    } catch {
+      return res.status(400).json({ error: 'invalid_payload' })
+    }
+  }
 
-  if (body?.company) {
+  const fields =
+    body && typeof body === 'object' && !Array.isArray(body)
+      ? (body as Record<string, unknown>)
+      : null
+
+  if (!fields) {
+    return res.status(400).json({ error: 'invalid_payload' })
+  }
+
+  if (fields.company) {
     return res.status(200).json({ ok: true })
   }
 
-  const name = trim(body?.name, MAX.name)
-  const phone = trim(body?.phone, MAX.phone)
-  const email = trim(body?.email, MAX.email)
-  const message = trim(body?.message, MAX.message)
+  const name = trim(fields.name, MAX.name)
+  const phone = trim(fields.phone, MAX.phone)
+  const email = trim(fields.email, MAX.email)
+  const message = trim(fields.message, MAX.message)
 
   if (!name || !phone || !email || !message || !isValidEmail(email)) {
     return res.status(400).json({ error: 'invalid_payload' })
