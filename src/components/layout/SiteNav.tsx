@@ -3,7 +3,6 @@ import { ArrowLeft, Menu, X } from 'lucide-react'
 import { useEffect, useState } from 'react'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { MobileMenu } from './MobileMenu'
-import { BrandMark } from '../ui/BrandMark'
 import { DESKTOP_NAV_LINKS, getNavClickHandler } from './navLinks'
 
 interface SiteNavProps {
@@ -61,15 +60,9 @@ export function SiteNav({ animate = true, fixed = false }: SiteNavProps) {
         transition={{ duration: 0.7, ease: [0.25, 0.1, 0.25, 1] }}
       >
         <div className="mx-auto flex max-w-[1440px] items-center justify-between gap-4">
-          <Link
-            to="/"
-            className="flex min-w-0 shrink items-center gap-2.5 transition-opacity duration-300 hover:opacity-80 sm:gap-3"
-          >
-            <BrandMark size={36} className="shadow-depth-sm" />
-            <span className="flex min-w-0 flex-col">
-              <span className="text-base font-bold tracking-tight text-text">שקד לוי</span>
-              <span className="hidden min-[400px]:block text-xs text-muted">אתרים לעולם העיצוב והשיפוצים</span>
-            </span>
+          <Link to="/" className="flex min-w-0 shrink flex-col transition-opacity duration-300 hover:opacity-80">
+            <span className="text-base font-bold tracking-tight text-text">שקד לוי</span>
+            <span className="hidden min-[400px]:block text-xs text-muted">אתרים לעולם העיצוב והשיפוצים</span>
           </Link>
 
           <nav className="hidden items-center gap-8 lg:flex" aria-label="ניווט ראשי">
