@@ -10,6 +10,7 @@ import {
 import { EASE_PREMIUM } from '../../motion/easing'
 import { staggerContainer, staggerItem } from '../../motion/variants'
 import { GlowOrb } from '../ui/GlowOrb'
+import { BrandMark } from '../ui/BrandMark'
 import { MockupLeadCta } from '../ui/MockupLeadCta'
 
 const NAV_LINKS = [
@@ -149,7 +150,8 @@ export function Footer({ showCta = true }: FooterProps) {
             variants={staggerItem}
             className="flex flex-wrap items-center justify-center gap-x-2 gap-y-1 md:flex-col md:items-start"
           >
-            <Link to="/" className="transition-opacity duration-300 hover:opacity-80">
+            <Link to="/" className="inline-flex items-center gap-2.5 transition-opacity duration-300 hover:opacity-80">
+              <BrandMark size={28} />
               <span className="text-base font-bold tracking-tight text-text">שקד לוי</span>
             </Link>
             <span className="text-muted md:hidden" aria-hidden>
