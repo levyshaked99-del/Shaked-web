@@ -1,7 +1,5 @@
 import type { MouseEvent } from 'react'
 import type { NavigateFunction } from 'react-router-dom'
-import { WHATSAPP_URL } from '../../constants/contact'
-
 export const HOME_NAV_HREF = '/#hero'
 export const WHY_US_NAV_HREF = '/#why-us'
 export const SERVICES_NAV_HREF = '/services'
@@ -22,9 +20,8 @@ export const MOBILE_NAV_LINKS = [
   { label: 'אודות', href: '/about' },
   {
     label: 'קבלו הדמיה בחינם',
-    href: WHATSAPP_URL,
+    href: '/contact',
     highlight: true,
-    external: true,
     highlightSubline: 'בלי התחייבות, תוך 48 שעות',
   },
 ] as const

@@ -1,8 +1,7 @@
 import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
-import { ArrowLeft } from 'lucide-react'
-import { WHATSAPP_URL } from '../../constants/contact'
 import { staggerContainer, staggerItemBlur } from '../../motion/variants'
+import { MockupLeadCta } from '../ui/MockupLeadCta'
 import { Metrics } from './Metrics'
 
 export function HeroContent() {
@@ -39,20 +38,7 @@ export function HeroContent() {
       </motion.p>
 
       <motion.div variants={staggerItemBlur} className="mt-7 flex flex-wrap items-center gap-3.5">
-        <a
-          href={WHATSAPP_URL}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="group inline-flex items-center gap-2 rounded-full bg-accent px-7 py-3.5 text-sm font-semibold text-white shadow-depth-md transition-shadow duration-300 hover:shadow-depth-lg"
-        >
-          קבלו הדמיה בחינם
-          <ArrowLeft
-            size={14}
-            strokeWidth={2}
-            className="transition-transform duration-300 group-hover:-translate-x-0.5 group-hover:text-brand/80"
-            aria-hidden
-          />
-        </a>
+        <MockupLeadCta />
 
         <Link
           to="/services"

@@ -1,9 +1,8 @@
 import { AnimatePresence, motion } from 'framer-motion'
 import { useEffect, useState } from 'react'
-import { WHATSAPP_URL } from '../../constants/contact'
 import { EASE_PREMIUM } from '../../motion/easing'
 import { usePrefersReducedMotion } from '../../hooks/usePrefersReducedMotion'
-import { WhatsAppIcon } from '../ContactSection/WhatsAppIcon'
+import { MockupLeadCta } from '../ui/MockupLeadCta'
 
 export function MobileStickyCta() {
   const [visible, setVisible] = useState(false)
@@ -62,15 +61,7 @@ export function MobileStickyCta() {
             className="pointer-events-auto px-3 pb-3"
             style={{ paddingBottom: 'max(12px, env(safe-area-inset-bottom))' }}
           >
-            <a
-              href={WHATSAPP_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex h-14 w-full items-center justify-center gap-2 rounded-2xl bg-text text-sm font-semibold text-white shadow-depth-md transition-shadow duration-300 hover:shadow-depth-lg"
-            >
-              <WhatsAppIcon size={18} className="text-white/90" />
-              קבלו הדמיה בחינם
-            </a>
+            <MockupLeadCta variant="bar" />
           </div>
         </motion.div>
       )}

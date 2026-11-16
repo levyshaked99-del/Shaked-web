@@ -6,12 +6,11 @@ import {
   CONTACT_EMAIL,
   CONTACT_PHONE,
   CONTACT_PHONE_HREF,
-  WHATSAPP_URL,
 } from '../../constants/contact'
 import { EASE_PREMIUM } from '../../motion/easing'
 import { staggerContainer, staggerItem } from '../../motion/variants'
-import { WhatsAppIcon } from '../ContactSection/WhatsAppIcon'
 import { GlowOrb } from '../ui/GlowOrb'
+import { MockupLeadCta } from '../ui/MockupLeadCta'
 
 const NAV_LINKS = [
   { label: 'פרויקטים', href: '/projects' },
@@ -101,25 +100,14 @@ export function Footer({ showCta = true }: FooterProps) {
               variants={staggerItem}
               className="mx-auto mt-6 max-w-lg text-[0.9375rem] leading-[1.85] text-text/60 md:text-base md:leading-[1.85]"
             >
-              שלחו הודעה, ותקבלו הדמיה של דף הבית, בחינם וללא התחייבות.
+              מלאו את הטופס ותקבלו הדמיה של דף הבית, בחינם וללא התחייבות.
             </motion.p>
 
             <motion.div
               variants={staggerItem}
               className="mt-10 flex flex-wrap items-center justify-center gap-3.5"
             >
-              <motion.a
-                href={WHATSAPP_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="קבלו הדמיה בחינם — נפתח בוואטסאפ בחלון חדש"
-                className="group inline-flex items-center gap-2 rounded-full bg-accent px-8 py-3.5 text-sm font-semibold text-white shadow-depth-md transition-shadow duration-300 hover:shadow-depth-lg"
-                whileHover={{ y: -2 }}
-                whileTap={{ scale: 0.98 }}
-              >
-                <WhatsAppIcon size={15} className="text-white/90" />
-                קבלו הדמיה בחינם
-              </motion.a>
+              <MockupLeadCta className="px-8" />
 
               <motion.div whileHover={{ y: -2 }} whileTap={{ scale: 0.98 }}>
                 <Link
