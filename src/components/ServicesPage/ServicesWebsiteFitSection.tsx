@@ -31,12 +31,12 @@ export function ServicesWebsiteFitSection() {
             {WEBSITE_TYPES_INTRO.label}
           </span>
 
-          <h2
+          <h1
             id="website-fit-heading"
             className="mt-6 whitespace-pre-line text-[clamp(1.85rem,4vw,3.15rem)] font-extrabold leading-[1.12] tracking-tight text-text"
           >
             {WEBSITE_TYPES_INTRO.heading}
-          </h2>
+          </h1>
         </motion.header>
 
         <div className="mt-16 grid grid-cols-1 gap-8 md:mt-20 md:grid-cols-2 md:gap-7 lg:mt-24 lg:grid-cols-3 lg:gap-10">

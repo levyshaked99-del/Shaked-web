@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import { ArrowLeft, Menu } from 'lucide-react'
+import { ArrowLeft, Menu, X } from 'lucide-react'
 import { useEffect, useState } from 'react'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { MobileMenu } from './MobileMenu'
@@ -16,6 +16,10 @@ export function SiteNav({ animate = true, fixed = false }: SiteNavProps) {
   const menuButtonId = 'mobile-menu-button'
   const { pathname, hash } = useLocation()
   const navigate = useNavigate()
+
+  useEffect(() => {
+    setMenuOpen(false)
+  }, [pathname, hash])
 
   useEffect(() => {
     if (pathname !== '/' || hash !== '#hero') return
@@ -42,6 +46,7 @@ export function SiteNav({ animate = true, fixed = false }: SiteNavProps) {
       <motion.header
         className={[
           'inset-x-0 top-0 z-50 w-full px-6 py-5 md:px-10 lg:px-16',
+          menuOpen ? 'z-[120]' : '',
           fixed ? 'fixed left-0 right-0' : 'absolute',
           fixed
             ? scrolled
@@ -50,8 +55,8 @@ export function SiteNav({ animate = true, fixed = false }: SiteNavProps) {
             : '',
           fixed ? 'transition-[background-color,box-shadow,border-color,backdrop-filter] duration-300 ease-out' : '',
         ].join(' ')}
-        initial={animate ? { opacity: 0, y: -12, filter: 'blur(6px)' } : false}
-        animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+        initial={animate ? { opacity: 0, y: -12 } : false}
+        animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.7, ease: [0.25, 0.1, 0.25, 1] }}
       >
         <div className="mx-auto flex max-w-[1440px] items-center justify-between gap-4">
@@ -78,13 +83,17 @@ export function SiteNav({ animate = true, fixed = false }: SiteNavProps) {
             <button
               id={menuButtonId}
               type="button"
-              aria-label="פתח תפריט"
+              aria-label={menuOpen ? 'סגור תפריט' : 'פתח תפריט'}
               aria-expanded={menuOpen}
               aria-controls="mobile-menu-panel"
-              className="flex h-10 w-10 items-center justify-center rounded-full border border-black/[0.08] text-text/70 transition-all duration-300 hover:border-black/[0.12] hover:bg-black/[0.03] hover:text-text lg:hidden"
-              onClick={() => setMenuOpen(true)}
+              className="relative z-[121] flex h-11 w-11 touch-manipulation items-center justify-center rounded-full border border-black/[0.08] bg-white text-text/70 transition-all duration-300 hover:border-black/[0.12] hover:bg-black/[0.03] hover:text-text active:scale-[0.97] lg:hidden"
+              onClick={() => setMenuOpen((open) => !open)}
             >
-              <Menu size={18} strokeWidth={1.75} aria-hidden />
+              {menuOpen ? (
+                <X size={18} strokeWidth={1.75} aria-hidden />
+              ) : (
+                <Menu size={18} strokeWidth={1.75} aria-hidden />
+              )}
             </button>
 
             <Link

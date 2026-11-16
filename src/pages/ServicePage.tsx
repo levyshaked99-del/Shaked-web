@@ -1,17 +1,17 @@
 import { motion } from 'framer-motion'
 import { ArrowLeft, Check } from 'lucide-react'
-import { useEffect } from 'react'
 import { Link, Navigate, useParams } from 'react-router-dom'
 import { SiteNav } from '../components/layout/SiteNav'
 import { Footer } from '../components/layout/Footer'
 import { GrainOverlay } from '../components/ui/GrainOverlay'
 import { GlowOrb } from '../components/ui/GlowOrb'
 import { LaunchPricingBadge } from '../components/ui/LaunchPricingBadge'
-import { PAGE_SEO } from '../constants/seo'
+import type { PageSeoKey } from '../constants/seo'
 import { getService } from '../data/servicesData'
+import { usePageMeta } from '../hooks/usePageMeta'
 import { staggerContainer, staggerItem } from '../motion/variants'
 
-const SERVICE_SEO: Record<string, keyof typeof PAGE_SEO> = {
+const SERVICE_SEO: Record<string, PageSeoKey> = {
   brand: 'serviceBrand',
   landing: 'serviceLanding',
   premium: 'servicePremium',
@@ -20,15 +20,8 @@ const SERVICE_SEO: Record<string, keyof typeof PAGE_SEO> = {
 export function ServicePage() {
   const { slug } = useParams<{ slug: string }>()
   const service = getService(slug)
-
-  useEffect(() => {
-    if (!service) return
-    const seoKey = SERVICE_SEO[service.slug]
-    const seo = seoKey ? PAGE_SEO[seoKey] : PAGE_SEO.home
-    document.title = seo.title
-    const desc = document.querySelector('meta[name="description"]')
-    if (desc) desc.setAttribute('content', seo.description)
-  }, [service])
+  const seoKey: PageSeoKey = service ? (SERVICE_SEO[service.slug] ?? 'home') : 'home'
+  usePageMeta(seoKey)
 
   if (!service) {
     return <Navigate to="/" replace />

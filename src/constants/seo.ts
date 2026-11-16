@@ -1,3 +1,8 @@
+/** Production origin — matches OG image URL in index.html */
+export const SITE_ORIGIN = 'https://www.shakedweb.com'
+
+export const OG_IMAGE_URL = `${SITE_ORIGIN}/og-image.jpg`
+
 export const SITE_NAME = 'שקד לוי · אתרים למעצבי פנים ושיפוצים'
 
 export const DEFAULT_DESCRIPTION =
@@ -40,6 +45,11 @@ export const PAGE_SEO = {
   accessibility: {
     title: 'הצהרת נגישות — שקד לוי',
     description: 'הצהרת נגישות האתר בהתאם לתקן הישראלי ת"י 5568 ו-WCAG 2.1 ברמה AA.',
+  },
+  notFound: {
+    title: 'הדף לא נמצא — שקד לוי',
+    description: 'העמוד שחיפשתם לא נמצא. חזרו לדף הבית או צרו קשר.',
+    robots: 'noindex, follow',
   },
 } as const
 
