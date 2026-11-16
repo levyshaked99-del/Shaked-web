@@ -1,29 +1,75 @@
 import { motion } from 'framer-motion'
 import { ArrowLeft } from 'lucide-react'
-import { useId, useState, type FormEvent } from 'react'
+import { useId, useRef, useState, type FormEvent, type RefObject } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { WHATSAPP_URL } from '../../constants/contact'
-import { EASE_PREMIUM } from '../../motion/easing'
 import { fadeUp } from '../../motion/variants'
 import { WhatsAppIcon } from './WhatsAppIcon'
 
 const fieldClass =
   'w-full border-0 border-b border-black/[0.08] bg-transparent px-0 py-3.5 text-[0.9375rem] text-text placeholder:text-text/50 transition-colors duration-300 focus:border-brand/40 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2 md:text-base'
 
-type SubmitState = 'idle' | 'submitting' | 'success' | 'error'
+type SubmitState = 'idle' | 'submitting' | 'error'
+
+type FieldKey = 'name' | 'phone' | 'email' | 'message'
+
+type FieldErrors = Partial<Record<FieldKey, string>>
+
+const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+
+function validateFields(payload: Record<FieldKey, string>): FieldErrors {
+  const errors: FieldErrors = {}
+  if (!payload.name.trim()) {
+    errors.name = 'נא למלא שם מלא.'
+  }
+  if (!payload.phone.trim()) {
+    errors.phone = 'נא למלא מספר טלפון.'
+  } else if (payload.phone.replace(/\D/g, '').length < 9) {
+    errors.phone = 'נא למלא מספר טלפון תקין.'
+  }
+  if (!payload.email.trim()) {
+    errors.email = 'נא למלא כתובת אימייל.'
+  } else if (!EMAIL_PATTERN.test(payload.email.trim())) {
+    errors.email = 'נא למלא כתובת אימייל תקינה.'
+  }
+  if (!payload.message.trim()) {
+    errors.message = 'נא לספר קצת על העסק.'
+  }
+  return errors
+}
+
+const FIELD_ORDER: FieldKey[] = ['name', 'phone', 'email', 'message']
 
 export function ContactForm() {
+  const navigate = useNavigate()
   const [submitState, setSubmitState] = useState<SubmitState>('idle')
   const [errorMessage, setErrorMessage] = useState<string | null>(null)
+  const [fieldErrors, setFieldErrors] = useState<FieldErrors>({})
   const nameId = useId()
   const phoneId = useId()
   const emailId = useId()
   const messageId = useId()
   const companyId = useId()
+  const nameErrorId = useId()
+  const phoneErrorId = useId()
+  const emailErrorId = useId()
+  const messageErrorId = useId()
+
+  const nameRef = useRef<HTMLInputElement>(null)
+  const phoneRef = useRef<HTMLInputElement>(null)
+  const emailRef = useRef<HTMLInputElement>(null)
+  const messageRef = useRef<HTMLTextAreaElement>(null)
+
+  const fieldRefs: Record<FieldKey, RefObject<HTMLInputElement | HTMLTextAreaElement | null>> = {
+    name: nameRef,
+    phone: phoneRef,
+    email: emailRef,
+    message: messageRef,
+  }
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
     setErrorMessage(null)
-    setSubmitState('submitting')
 
     const form = event.currentTarget
     const data = new FormData(form)
@@ -35,11 +81,36 @@ export function ContactForm() {
       company: String(data.get('company') ?? ''),
     }
 
+    const validationErrors = validateFields({
+      name: payload.name,
+      phone: payload.phone,
+      email: payload.email,
+      message: payload.message,
+    })
+
+    if (Object.keys(validationErrors).length > 0) {
+      setFieldErrors(validationErrors)
+      setSubmitState('idle')
+      const firstInvalid = FIELD_ORDER.find((key) => validationErrors[key])
+      if (firstInvalid) {
+        fieldRefs[firstInvalid].current?.focus()
+      }
+      return
+    }
+
+    setFieldErrors({})
+    setSubmitState('submitting')
+
+    const controller = new AbortController()
+    const timeoutId = window.setTimeout(() => controller.abort(), 25_000)
+    let navigated = false
+
     try {
       const res = await fetch('/api/contact', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload),
+        signal: controller.signal,
       })
 
       if (!res.ok) {
@@ -52,32 +123,21 @@ export function ContactForm() {
         return
       }
 
-      setSubmitState('success')
-    } catch {
-      setErrorMessage('בעיית רשת. בדקו חיבור ונסו שוב, או פנו בוואטסאפ.')
+      navigated = true
+      navigate('/thank-you', { replace: true })
+    } catch (error) {
+      if (error instanceof DOMException && error.name === 'AbortError') {
+        setErrorMessage('הבקשה ארכה יותר מדי. נסו שוב או פנו בוואטסאפ.')
+      } else {
+        setErrorMessage('בעיית רשת. בדקו חיבור ונסו שוב, או פנו בוואטסאפ.')
+      }
       setSubmitState('error')
+    } finally {
+      window.clearTimeout(timeoutId)
+      if (!navigated) {
+        setSubmitState((prev) => (prev === 'submitting' ? 'error' : prev))
+      }
     }
-  }
-
-  if (submitState === 'success') {
-    return (
-      <motion.div
-        className="flex min-h-[420px] flex-col justify-center py-8"
-        initial={{ opacity: 0, y: 16 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.65, ease: EASE_PREMIUM }}
-        role="status"
-        aria-live="polite"
-        aria-atomic="true"
-      >
-        <h2 className="text-[clamp(1.5rem,3vw,2rem)] font-bold tracking-tight text-text">
-          תודה על הפנייה!
-        </h2>
-        <p className="mt-4 max-w-sm text-[0.9375rem] leading-relaxed text-text/60 md:text-base">
-          קיבלתי את הפרטים ואחזור אליך בהקדם כדי להמשיך משם.
-        </p>
-      </motion.div>
-    )
   }
 
   const isSubmitting = submitState === 'submitting'
@@ -103,14 +163,23 @@ export function ContactForm() {
             שם מלא
           </label>
           <input
+            ref={nameRef}
             id={nameId}
             type="text"
             name="name"
             required
             disabled={isSubmitting}
             autoComplete="name"
+            aria-invalid={fieldErrors.name ? true : undefined}
+            aria-describedby={fieldErrors.name ? nameErrorId : undefined}
+            onChange={() => fieldErrors.name && setFieldErrors((prev) => ({ ...prev, name: undefined }))}
             className={fieldClass}
           />
+          {fieldErrors.name && (
+            <p id={nameErrorId} className="mt-2 text-sm font-medium text-text" role="alert">
+              {fieldErrors.name}
+            </p>
+          )}
         </div>
 
         <div>
@@ -118,15 +187,24 @@ export function ContactForm() {
             טלפון
           </label>
           <input
+            ref={phoneRef}
             id={phoneId}
             type="tel"
             name="phone"
             required
             disabled={isSubmitting}
             autoComplete="tel"
+            aria-invalid={fieldErrors.phone ? true : undefined}
+            aria-describedby={fieldErrors.phone ? phoneErrorId : undefined}
+            onChange={() => fieldErrors.phone && setFieldErrors((prev) => ({ ...prev, phone: undefined }))}
             className={fieldClass}
             dir="ltr"
           />
+          {fieldErrors.phone && (
+            <p id={phoneErrorId} className="mt-2 text-sm font-medium text-text" role="alert">
+              {fieldErrors.phone}
+            </p>
+          )}
         </div>
 
         <div>
@@ -134,15 +212,24 @@ export function ContactForm() {
             אימייל
           </label>
           <input
+            ref={emailRef}
             id={emailId}
             type="email"
             name="email"
             required
             disabled={isSubmitting}
             autoComplete="email"
+            aria-invalid={fieldErrors.email ? true : undefined}
+            aria-describedby={fieldErrors.email ? emailErrorId : undefined}
+            onChange={() => fieldErrors.email && setFieldErrors((prev) => ({ ...prev, email: undefined }))}
             className={fieldClass}
             dir="ltr"
           />
+          {fieldErrors.email && (
+            <p id={emailErrorId} className="mt-2 text-sm font-medium text-text" role="alert">
+              {fieldErrors.email}
+            </p>
+          )}
         </div>
 
         <div>
@@ -150,14 +237,23 @@ export function ContactForm() {
             ספר לי על העסק שלך
           </label>
           <textarea
+            ref={messageRef}
             id={messageId}
             name="message"
             required
             disabled={isSubmitting}
             rows={4}
             autoComplete="off"
+            aria-invalid={fieldErrors.message ? true : undefined}
+            aria-describedby={fieldErrors.message ? messageErrorId : undefined}
+            onChange={() => fieldErrors.message && setFieldErrors((prev) => ({ ...prev, message: undefined }))}
             className={`${fieldClass} resize-none leading-relaxed`}
           />
+          {fieldErrors.message && (
+            <p id={messageErrorId} className="mt-2 text-sm font-medium text-text" role="alert">
+              {fieldErrors.message}
+            </p>
+          )}
         </div>
       </div>
 

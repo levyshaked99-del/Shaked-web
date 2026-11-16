@@ -9,6 +9,8 @@ import { HomePage } from './pages/HomePage'
 import { ServicesPage } from './pages/ServicesPage'
 import { ProjectsPage } from './pages/ProjectsPage'
 import { ServicePage } from './pages/ServicePage'
+import { NotFoundPage } from './pages/NotFoundPage'
+import { ThankYouPage } from './pages/ThankYouPage'
 
 function App() {
   return (
@@ -23,7 +25,9 @@ function App() {
           <Route path="/services" element={<ServicesPage />} />
           <Route path="/services/:slug" element={<ServicePage />} />
           <Route path="/contact" element={<ContactPage />} />
+          <Route path="/thank-you" element={<ThankYouPage />} />
           <Route path="/accessibility" element={<AccessibilityPage />} />
+          <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </BrowserRouter>
     </MotionConfig>
